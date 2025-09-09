@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Days Inn & Suites NASA Webster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@200;300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Days Inn Brand Colors */
+            --brand-blue: #003c71;
+            --brand-blue-dark: #002449;
+            --brand-blue-light: #0054a6;
+            --brand-yellow: #ffc72c;
+            --brand-yellow-bright: #ffdd00;
+            --brand-yellow-soft: #ffe380;
+            --brand-white: #ffffff;
+            
+            /* Luxury Variations */
+            --midnight-blue: #001f3f;
+            --royal-blue: #004080;
+            --sky-blue: #4a90e2;
+            --champagne: #fff5d6;
+            --pearl: #fafafa;
+            --silver: #e8e8e8;
+            
+            /* Functional Colors */
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-blue: rgba(0, 60, 113, 0.05);
+            --text-light: rgba(255, 255, 255, 0.95);
+            --text-muted: rgba(255, 255, 255, 0.75);
+            --text-dark: #002449;
+            --shadow: rgba(0, 36, 73, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--brand-blue) 100%);
+            color: var(--brand-white);
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+            min-width: 320px;
+        }
+
+        /* Premium Noise Texture */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.02;
+            z-index: 1;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 199, 44, 0.01) 35px, rgba(255, 199, 44, 0.01) 70px),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="noise"><feTurbulence baseFrequency="0.9"/></filter><rect width="200" height="200" filter="url(%23noise)" opacity="0.4"/></svg>');
+        }
+
+        /* Premium Navigation - Matching index.html */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(180deg, rgba(0, 31, 63, 0.95) 0%, rgba(0, 60, 113, 0.9) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 199, 44, 0.15);
+        }
+
+        nav.scrolled {
+            background: linear-gradient(180deg, rgba(0, 36, 73, 0.98) 0%, rgba(0, 60, 113, 0.95) 100%);
+            backdrop-filter: blur(30px) saturate(200%);
+            padding: 1rem 3rem;
+            border-bottom: 1px solid rgba(255, 199, 44, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 36, 73, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--brand-white) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.2));
+        }
+
+        .logo:hover {
+            filter: drop-shadow(0 4px 20px rgba(255, 199, 44, 0.4));
+            transform: translateY(-1px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--brand-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            position: relative;
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 4px rgba(0, 36, 73, 0.3);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            transition: width 0.3s ease;
+            box-shadow: 0 2px 10px rgba(255, 199, 44, 0.5);
+        }
+
+        .nav-link:hover {
+            color: var(--brand-yellow-soft);
+            transform: translateY(-1px);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--brand-yellow-soft);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .book-now {
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 50%, var(--brand-yellow) 100%);
+            color: var(--brand-blue-dark);
+            border: 2px solid transparent;
+            padding: 0.9rem 2.2rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 3px;
+            box-shadow: 
+                0 2px 10px rgba(255, 199, 44, 0.3),
+                0 10px 40px rgba(255, 199, 44, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 10px rgba(0, 36, 73, 0.1);
+            text-shadow: 0 1px 2px rgba(0, 36, 73, 0.2);
+            transform-style: preserve-3d;
+        }
+
+        .book-now::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            transform: translateX(-100%) skewX(-45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .book-now:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 4px 20px rgba(255, 199, 44, 0.5),
+                0 15px 50px rgba(255, 199, 44, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -3px 15px rgba(0, 36, 73, 0.15);
+            background: linear-gradient(135deg, var(--brand-yellow-bright) 0%, var(--brand-yellow) 50%, var(--brand-yellow-bright) 100%);
+            border-color: rgba(255, 199, 44, 0.3);
+        }
+
+        .book-now:hover::before {
+            transform: translateX(100%) skewX(-45deg);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-white) 100%);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .nav-links.active {
+            display: flex !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0, 31, 63, 0.98) 0%, rgba(0, 60, 113, 0.98) 100%);
+            backdrop-filter: blur(30px);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1000;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .nav-links.active.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Gallery Hero - Premium Edition */
+        .gallery-hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--midnight-blue) 0%, var(--brand-blue) 50%, var(--royal-blue) 100%);
+        }
+
+        .gallery-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 199, 44, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            z-index: 1;
+            animation: pulse-bg 8s ease infinite;
+        }
+
+        @keyframes pulse-bg {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .hero-gallery-preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 2px;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: contrast(1.1) brightness(0.9);
+            transition: all 0.5s ease;
+        }
+
+        .preview-img:hover {
+            filter: contrast(1.2) brightness(1.1);
+            transform: scale(1.05);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 1000px;
+            padding: 0 2rem;
+        }
+
+        .hero-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.1s forwards;
+            font-weight: 500;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.3));
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.2s forwards;
+            font-weight: 700;
+            text-shadow: 0 4px 20px rgba(0, 36, 73, 0.3);
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeInUp 1s 0.3s forwards;
+            text-shadow: 0 2px 10px rgba(0, 36, 73, 0.3);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 2;
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--brand-yellow);
+            fill: none;
+            stroke-width: 2;
+            filter: drop-shadow(0 4px 10px rgba(255, 199, 44, 0.4));
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Gallery Controls - Premium Style */
+        .gallery-controls {
+            padding: 4rem 3rem 2rem;
+            background: linear-gradient(180deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+            position: sticky;
+            top: 85px;
+            z-index: 999;
+            box-shadow: 0 2px 20px rgba(0, 36, 73, 0.3);
+            backdrop-filter: blur(20px) saturate(180%);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 199, 44, 0.1);
+        }
+
+        .gallery-controls.scrolled {
+            top: 70px;
+            padding: 2rem 3rem 1.5rem;
+            background: linear-gradient(180deg, rgba(0, 36, 73, 0.95) 0%, rgba(0, 60, 113, 0.95) 100%);
+        }
+
+        .controls-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .view-options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .view-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 199, 44, 0.05) 100%);
+            border: 1px solid rgba(255, 199, 44, 0.3);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .view-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        .view-btn::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .view-btn.active,
+        .view-btn:hover {
+            color: var(--brand-blue-dark);
+            border-color: var(--brand-yellow);
+            box-shadow: 0 4px 15px rgba(255, 199, 44, 0.3);
+        }
+
+        .view-btn.active::before,
+        .view-btn:hover::before {
+            width: 100%;
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 1px solid rgba(255, 199, 44, 0.2);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            color: var(--brand-blue-dark);
+            border-color: var(--brand-yellow);
+            box-shadow: 0 4px 15px rgba(255, 199, 44, 0.3);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--brand-yellow);
+            color: var(--brand-yellow);
+        }
+
+        /* Gallery Section - Premium White */
+        .gallery-section {
+            padding: 4rem 3rem 8rem;
+            background: linear-gradient(180deg, var(--pearl) 0%, var(--brand-white) 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .gallery-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--brand-yellow) 50%, transparent 100%);
+        }
+
+        .gallery-container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Grid View */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .gallery-grid.hidden {
+            display: none;
+        }
+
+
+        /* Carousel View */
+        .gallery-carousel {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+            border-radius: 20px;
+            box-shadow: 
+                0 25px 50px rgba(0, 36, 73, 0.3),
+                0 0 0 1px rgba(255, 199, 44, 0.2);
+        }
+
+        .gallery-carousel.hidden {
+            display: none;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 2rem;
+            pointer-events: none;
+        }
+
+        .carousel-btn {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 36, 73, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--brand-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            pointer-events: all;
+            cursor: pointer;
+        }
+
+        .carousel-btn:hover {
+            background: var(--brand-yellow);
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 199, 44, 0.5);
+        }
+
+        .carousel-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--brand-yellow);
+            fill: none;
+        }
+
+        .carousel-btn:hover svg {
+            stroke: var(--brand-blue-dark);
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .indicator.active {
+            background: var(--brand-yellow);
+            transform: scale(1.5);
+            box-shadow: 0 0 20px rgba(255, 199, 44, 0.5);
+        }
+
+        /* Gallery Item - Premium Style */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            background: var(--brand-white);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 36, 73, 0.1);
+            break-inside: avoid;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 60, 113, 0.1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                0 20px 50px rgba(0, 36, 73, 0.2),
+                0 0 0 2px var(--brand-yellow);
+        }
+
+
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            filter: brightness(1.05) contrast(1.1);
+        }
+
+        .gallery-grid .gallery-item {
+            height: 350px;
+        }
+
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+
+
+        .view-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            z-index: 3;
+            box-shadow: 0 5px 20px rgba(255, 199, 44, 0.4);
+        }
+
+        .gallery-item:hover .view-icon {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .view-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--brand-blue-dark);
+            fill: none;
+        }
+
+        /* Lightbox - Premium Edition */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 31, 63, 0.95) 0%, rgba(0, 60, 113, 0.95) 100%);
+            backdrop-filter: blur(30px);
+            z-index: 2000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            animation: lightboxZoom 0.3s ease;
+        }
+
+        @keyframes lightboxZoom {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            box-shadow: 
+                0 20px 60px rgba(0, 36, 73, 0.5),
+                0 0 0 1px rgba(255, 199, 44, 0.2);
+            border-radius: 8px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 2px solid var(--brand-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .lightbox-close:hover {
+            background: var(--brand-yellow);
+            transform: rotate(90deg);
+            box-shadow: 0 0 20px rgba(255, 199, 44, 0.5);
+        }
+
+        .lightbox-close svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--brand-yellow);
+        }
+
+        .lightbox-close:hover svg {
+            stroke: var(--brand-blue-dark);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 2rem;
+            pointer-events: none;
+        }
+
+        .lightbox-btn {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 199, 44, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--brand-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            pointer-events: all;
+            cursor: pointer;
+        }
+
+        .lightbox-btn:hover {
+            background: var(--brand-yellow);
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 199, 44, 0.5);
+        }
+
+        .lightbox-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--brand-yellow);
+            fill: none;
+        }
+
+        .lightbox-btn:hover svg {
+            stroke: var(--brand-blue-dark);
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.3));
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Footer - Matching index.html */
+        footer {
+            padding: 5rem 3rem 2rem;
+            background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--brand-blue-dark) 100%);
+            border-top: 1px solid rgba(255, 199, 44, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.3));
+        }
+
+        .footer-description {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-yellow);
+            padding-left: 0.5rem;
+            text-shadow: 0 2px 10px rgba(255, 199, 44, 0.3);
+        }
+
+        .footer-bottom {
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 199, 44, 0.1);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            nav.scrolled {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-container {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .gallery-hero {
+                padding: 0 0.8rem;
+                min-height: 100vh;
+                height: auto;
+            }
+
+            .hero-content {
+                padding: 6rem 0.8rem 4rem;
+            }
+
+            .gallery-controls {
+                padding: 2rem 1rem 1rem;
+                top: 60px;
+            }
+
+            .controls-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .view-options,
+            .filter-options {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .gallery-section {
+                padding: 2rem 1rem 4rem;
+            }
+
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .gallery-carousel {
+                height: 300px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-gallery-preview {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Noise Texture -->
+    <div class="noise"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">DAYS INN NASA</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="guestrooms.html" class="nav-link">Guest Rooms</a></li>
+                <li><a href="amenities.html" class="nav-link">Amenities</a></li>
+                <li><a href="gallery.html" class="nav-link active">Gallery</a></li>
+                <li><a href="hotel-policies-page.html" class="nav-link">Hotel Policies</a></li>
+                <li><a href="hotel-reviews-page.html" class="nav-link">Reviews</a></li>
+                <li><a href="specials-page.html" class="nav-link">Specials</a></li>
+                <li><button class="book-now" onclick="window.open('https://www.wyndhamhotels.com/hotel/15443', '_blank')">Book Now</button></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Gallery Hero -->
+    <section class="gallery-hero">
+        <div class="hero-gallery-preview">
+            <img src="Images/gallery/1.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/2.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/3.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/4.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/5.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/6.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/7.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/8.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/9.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/10.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/11.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/2.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/13.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/14.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/15.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/16.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/17.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/18.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/19.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/20.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/21.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/22.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/23.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/24.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/25.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/26.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/27.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/28.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/29.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/30.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/31.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/32.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/33.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/34.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/35.jpg" alt="Gallery Preview" class="preview-img">
+            <img src="Images/gallery/1.jpg" alt="Gallery Preview" class="preview-img">
+        </div>
+        <div class="hero-content">
+            <div class="hero-subtitle">Visual Journey</div>
+            <h1 class="hero-title">Hotel Gallery</h1>
+            <p class="hero-description">
+                Explore our beautiful property through stunning imagery showcasing our rooms, amenities, and the exceptional experience that awaits you
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24">
+                <polyline points="7 10 12 15 17 10"></polyline>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Gallery Controls -->
+    <section class="gallery-controls">
+        <div class="controls-container">
+            <div class="view-options">
+                <button class="view-btn active" data-view="grid">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    Grid
+                </button>
+                <button class="view-btn" data-view="carousel">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="8" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="16" cy="12" r="1"/></svg>
+                    Carousel
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="gallery-container">
+            <!-- Grid View -->
+            <div class="gallery-grid" id="gridView">
+                <div class="gallery-item" data-category="rooms" data-index="1">
+                    <img src="Images/gallery/1.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="amenities" data-index="2">
+                    <img src="Images/gallery/2.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="exterior" data-index="3">
+                    <img src="Images/gallery/3.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="rooms" data-index="4">
+                    <img src="Images/gallery/4.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="amenities" data-index="5">
+                    <img src="Images/gallery/5.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="amenities" data-index="6">
+                    <img src="Images/gallery/6.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="rooms" data-index="7">
+                    <img src="Images/gallery/7.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="exterior" data-index="8">
+                    <img src="Images/gallery/8.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="rooms" data-index="9">
+                    <img src="Images/gallery/9.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="amenities" data-index="10">
+                    <img src="Images/gallery/10.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="rooms" data-index="11">
+                    <img src="Images/gallery/11.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="amenities" data-index="13">
+                    <img src="Images/gallery/13.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="rooms" data-index="14">
+                    <img src="Images/gallery/14.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="exterior" data-index="15">
+                    <img src="Images/gallery/15.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="rooms" data-index="16">
+                    <img src="Images/gallery/16.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="amenities" data-index="16">
+                    <img src="Images/gallery/17.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="exterior" data-index="17">
+                    <img src="Images/gallery/18.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="rooms" data-index="18">
+                    <img src="Images/gallery/19.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="amenities" data-index="19">
+                    <img src="Images/gallery/20.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="rooms" data-index="20">
+                    <img src="Images/gallery/21.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="exterior" data-index="21">
+                    <img src="Images/gallery/22.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="amenities" data-index="22">
+                    <img src="Images/gallery/23.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="rooms" data-index="23">
+                    <img src="Images/gallery/24.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="exterior" data-index="24">
+                    <img src="Images/gallery/25.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="amenities" data-index="25">
+                    <img src="Images/gallery/26.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="rooms" data-index="26">
+                    <img src="Images/gallery/27.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="exterior" data-index="27">
+                    <img src="Images/gallery/28.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="amenities" data-index="28">
+                    <img src="Images/gallery/29.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="rooms" data-index="29">
+                    <img src="Images/gallery/30.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="exterior" data-index="30">
+                    <img src="Images/gallery/31.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="amenities" data-index="31">
+                    <img src="Images/gallery/32.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="rooms" data-index="32">
+                    <img src="Images/gallery/33.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="exterior" data-index="33">
+                    <img src="Images/gallery/34.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="amenities" data-index="34">
+                    <img src="Images/gallery/35.jpg" alt="Gallery Image" class="gallery-img">
+                    <div class="view-icon">
+                        <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Carousel View -->
+            <div class="gallery-carousel hidden" id="carouselView">
+                <div class="carousel-track">
+                    <!-- Slides will be dynamically populated -->
+                </div>
+                <div class="carousel-nav">
+                    <button class="carousel-btn prev">
+                        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <button class="carousel-btn next">
+                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+                <div class="carousel-indicators">
+                    <!-- Indicators will be dynamically populated -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <img src="" alt="" class="lightbox-img" id="lightboxImg">
+            <div class="lightbox-nav">
+                <button class="lightbox-btn prev">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button class="lightbox-btn next">
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+            <div class="lightbox-counter">
+                <span id="currentImage">1</span> / <span id="totalImages">34</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">DAYS INN & SUITES NASA</div>
+                <p class="footer-description">
+                    One of the area's best hotels in Webster, TX near Clear Lake and within the Houston metropolitan area. Offering location convenience, affordability, and comfort with true Southern Texas hospitality.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Hotel Features</h4>
+                <ul class="footer-links">
+                    <li><a href="guestrooms.html">63 Guest Rooms</a></li>
+                    <li><a href="gallery.html">Photo Gallery</a></li>
+                    <li><a href="amenities.html">Free Grab & Go Breakfast</a></li>
+                    <li><a href="amenities.html">Indoor Heated Pool</a></li>
+                    <li><a href="amenities.html">Business Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Nearby Attractions</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#location">NASA Johnson Space Center</a></li>
+                    <li><a href="index.html#location">Kemah Boardwalk</a></li>
+                    <li><a href="index.html#location">Schlitterbahn Galveston</a></li>
+                    <li><a href="index.html#location">Gulf Greyhound Park</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Guest Services</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#contact">24/7 Virtual Front Desk</a></li>
+                    <li><a href="amenities.html">Express Check-In/Out</a></li>
+                    <li><a href="amenities.html">Multilingual Staff</a></li>
+                    <li><a href="hotel-policies-page.html">Hotel Policies</a></li>
+                    <li><a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank">Make a Reservation</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Days Inn & Suites NASA. 201 North Texas Ave, Webster, Texas 77598 | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Gallery Data
+        const galleryData = [
+            { id: 1, category: 'rooms' },
+            { id: 2, category: 'amenities' },
+            { id: 3, category: 'exterior' },
+            { id: 4, category: 'rooms' },
+            { id: 5, category: 'amenities' },
+            { id: 6, category: 'amenities' },
+            { id: 7, category: 'rooms' },
+            { id: 8, category: 'exterior' },
+            { id: 9, category: 'rooms' },
+            { id: 10, category: 'amenities' },
+            { id: 11, category: 'rooms' },
+            { id: 13, category: 'amenities' },
+            { id: 14, category: 'rooms' },
+            { id: 15, category: 'exterior' },
+            { id: 16, category: 'rooms' },
+            { id: 17, category: 'amenities' },
+            { id: 18, category: 'exterior' },
+            { id: 19, category: 'rooms' },
+            { id: 20, category: 'amenities' },
+            { id: 21, category: 'rooms' },
+            { id: 22, category: 'exterior' },
+            { id: 23, category: 'amenities' },
+            { id: 24, category: 'rooms' },
+            { id: 25, category: 'exterior' },
+            { id: 26, category: 'amenities' },
+            { id: 27, category: 'rooms' },
+            { id: 28, category: 'exterior' },
+            { id: 29, category: 'amenities' },
+            { id: 30, category: 'rooms' },
+            { id: 31, category: 'exterior' },
+            { id: 32, category: 'amenities' },
+            { id: 33, category: 'rooms' },
+            { id: 34, category: 'exterior' },
+            { id: 35, category: 'amenities' }
+        ];
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const galleryControls = document.querySelector('.gallery-controls');
+            
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+                if (galleryControls) {
+                    galleryControls.classList.add('scrolled');
+                }
+            } else {
+                navbar.classList.remove('scrolled');
+                if (galleryControls) {
+                    galleryControls.classList.remove('scrolled');
+                }
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+                
+                if (navLinks.classList.contains('active')) {
+                    setTimeout(() => navLinks.classList.add('visible'), 10);
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    navLinks.classList.remove('visible');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active', 'visible');
+                    menuToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // View Controls
+        const viewBtns = document.querySelectorAll('.view-btn');
+        const gridView = document.getElementById('gridView');
+        const carouselView = document.getElementById('carouselView');
+
+        viewBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const view = btn.getAttribute('data-view');
+                
+                viewBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                gridView.classList.add('hidden');
+                carouselView.classList.add('hidden');
+                
+                if (view === 'grid') {
+                    gridView.classList.remove('hidden');
+                } else if (view === 'carousel') {
+                    setupCarouselView();
+                    carouselView.classList.remove('hidden');
+                }
+            });
+        });
+
+
+        // Setup Carousel View
+        let currentSlide = 0;
+        
+        function setupCarouselView() {
+            const track = carouselView.querySelector('.carousel-track');
+            const indicators = carouselView.querySelector('.carousel-indicators');
+            
+            if (track.children.length === 0) {
+                            galleryData.forEach((item, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.innerHTML = `<img src="Images/gallery/${item.id}.jpg" alt="Gallery Image ${item.id}">`;
+                track.appendChild(slide);
+                
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator';
+                if (index === 0) indicator.classList.add('active');
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicators.appendChild(indicator);
+            });
+            }
+        }
+
+        // Carousel Navigation
+        function goToSlide(n) {
+            const track = document.querySelector('.carousel-track');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            currentSlide = n;
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            indicators.forEach((ind, i) => {
+                ind.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        document.querySelector('.carousel-btn.prev')?.addEventListener('click', () => {
+            currentSlide = currentSlide > 0 ? currentSlide - 1 : galleryData.length - 1;
+            goToSlide(currentSlide);
+        });
+
+        document.querySelector('.carousel-btn.next')?.addEventListener('click', () => {
+            currentSlide = currentSlide < galleryData.length - 1 ? currentSlide + 1 : 0;
+            goToSlide(currentSlide);
+        });
+
+
+
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        let currentImageIndex = 0;
+
+        function openLightbox(index) {
+            currentImageIndex = index - 1;
+            lightbox.classList.add('active');
+            updateLightboxImage();
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+        }
+
+        function updateLightboxImage() {
+            const item = galleryData[currentImageIndex];
+            lightboxImg.src = `Images/gallery/${item.id}.jpg`;
+            lightboxImg.alt = `Gallery Image ${item.id}`;
+            document.getElementById('currentImage').textContent = currentImageIndex + 1;
+            document.getElementById('totalImages').textContent = galleryData.length;
+        }
+
+        function attachLightboxListeners() {
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const index = parseInt(item.getAttribute('data-index'));
+                    openLightbox(index);
+                });
+            });
+        }
+
+        attachLightboxListeners();
+
+        // Lightbox controls
+        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+        
+        document.querySelector('.lightbox-btn.prev').addEventListener('click', () => {
+            currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : galleryData.length - 1;
+            updateLightboxImage();
+        });
+
+        document.querySelector('.lightbox-btn.next').addEventListener('click', () => {
+            currentImageIndex = currentImageIndex < galleryData.length - 1 ? currentImageIndex + 1 : 0;
+            updateLightboxImage();
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') document.querySelector('.lightbox-btn.prev').click();
+                if (e.key === 'ArrowRight') document.querySelector('.lightbox-btn.next').click();
+            }
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.gallery-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amenities | Days Inn & Suites NASA Webster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@200;300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Days Inn Brand Colors */
+            --brand-blue: #003c71;
+            --brand-blue-dark: #002449;
+            --brand-blue-light: #0054a6;
+            --brand-yellow: #ffc72c;
+            --brand-yellow-bright: #ffdd00;
+            --brand-yellow-soft: #ffe380;
+            --brand-white: #ffffff;
+            
+            /* Luxury Variations */
+            --midnight-blue: #001f3f;
+            --royal-blue: #004080;
+            --sky-blue: #4a90e2;
+            --champagne: #fff5d6;
+            --pearl: #fafafa;
+            --silver: #e8e8e8;
+            
+            /* Functional Colors */
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-blue: rgba(0, 60, 113, 0.05);
+            --text-light: rgba(255, 255, 255, 0.95);
+            --text-muted: rgba(255, 255, 255, 0.75);
+            --text-dark: #002449;
+            --shadow: rgba(0, 36, 73, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--brand-blue) 100%);
+            color: var(--brand-white);
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+            min-width: 320px;
+        }
+
+        /* Premium Noise Texture */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.02;
+            z-index: 1;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 199, 44, 0.01) 35px, rgba(255, 199, 44, 0.01) 70px),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="noise"><feTurbulence baseFrequency="0.9"/></filter><rect width="200" height="200" filter="url(%23noise)" opacity="0.4"/></svg>');
+        }
+
+        /* Premium Navigation - Matching index.html */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(180deg, rgba(0, 31, 63, 0.95) 0%, rgba(0, 60, 113, 0.9) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 199, 44, 0.15);
+        }
+
+        nav.scrolled {
+            background: linear-gradient(180deg, rgba(0, 36, 73, 0.98) 0%, rgba(0, 60, 113, 0.95) 100%);
+            backdrop-filter: blur(30px) saturate(200%);
+            padding: 1rem 3rem;
+            border-bottom: 1px solid rgba(255, 199, 44, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 36, 73, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--brand-white) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.2));
+        }
+
+        .logo:hover {
+            filter: drop-shadow(0 4px 20px rgba(255, 199, 44, 0.4));
+            transform: translateY(-1px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--brand-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            position: relative;
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 4px rgba(0, 36, 73, 0.3);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            transition: width 0.3s ease;
+            box-shadow: 0 2px 10px rgba(255, 199, 44, 0.5);
+        }
+
+        .nav-link:hover {
+            color: var(--brand-yellow-soft);
+            transform: translateY(-1px);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--brand-yellow-soft);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+
+        .book-now {
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 50%, var(--brand-yellow) 100%);
+            color: var(--brand-blue-dark);
+            border: 2px solid transparent;
+            padding: 0.9rem 2.2rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 3px;
+            box-shadow: 
+                0 2px 10px rgba(255, 199, 44, 0.3),
+                0 10px 40px rgba(255, 199, 44, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 10px rgba(0, 36, 73, 0.1);
+            text-shadow: 0 1px 2px rgba(0, 36, 73, 0.2);
+            transform-style: preserve-3d;
+        }
+
+        .book-now::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            transform: translateX(-100%) skewX(-45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .book-now:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 4px 20px rgba(255, 199, 44, 0.5),
+                0 15px 50px rgba(255, 199, 44, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -3px 15px rgba(0, 36, 73, 0.15);
+            background: linear-gradient(135deg, var(--brand-yellow-bright) 0%, var(--brand-yellow) 50%, var(--brand-yellow-bright) 100%);
+            border-color: rgba(255, 199, 44, 0.3);
+        }
+
+        .book-now:hover::before {
+            transform: translateX(100%) skewX(-45deg);
+        }
+
+        /* Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-white) 100%);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .nav-links.active {
+            display: flex !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0, 31, 63, 0.98) 0%, rgba(0, 60, 113, 0.98) 100%);
+            backdrop-filter: blur(30px);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1000;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .nav-links.active.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section - Premium Edition */
+        .amenities-hero {
+            height: 70vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--midnight-blue) 0%, var(--brand-blue) 50%, var(--royal-blue) 100%);
+        }
+
+        .amenities-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 199, 44, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            z-index: 1;
+            animation: pulse-bg 10s ease infinite;
+        }
+
+        @keyframes pulse-bg {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 1000px;
+            padding: 0 2rem;
+        }
+
+        .hero-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.1s forwards;
+            font-weight: 500;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.3));
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.2s forwards;
+            font-weight: 700;
+            text-shadow: 0 4px 20px rgba(0, 36, 73, 0.3);
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-light);
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeInUp 1s 0.3s forwards;
+            text-shadow: 0 2px 10px rgba(0, 36, 73, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Featured Amenities Section - Premium Blue */
+        .featured-amenities {
+            padding: 8rem 3rem;
+            background: linear-gradient(180deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+            position: relative;
+        }
+
+        .featured-amenities::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(255, 199, 44, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 70% 80%, rgba(74, 144, 226, 0.08) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .featured-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-shadow: 0 4px 20px rgba(0, 36, 73, 0.3);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .featured-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 199, 44, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 199, 44, 0.2);
+            padding: 3rem;
+            border-radius: 20px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 10px 30px rgba(0, 36, 73, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(255, 199, 44, 0.15) 0%, transparent 70%);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .featured-card:hover::before {
+            opacity: 1;
+            transform: rotate(45deg);
+        }
+
+        .featured-card:hover {
+            transform: translateY(-10px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 199, 44, 0.08) 100%);
+            box-shadow: 
+                0 20px 40px rgba(0, 36, 73, 0.3),
+                0 0 0 1px var(--brand-yellow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .featured-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 4px 15px rgba(255, 199, 44, 0.4));
+        }
+
+        .featured-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .featured-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            filter: drop-shadow(0 2px 8px rgba(255, 199, 44, 0.3));
+        }
+
+        .featured-description {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* Amenities Categories - Premium Style */
+        .categories-section {
+            padding: 8rem 3rem;
+            background: linear-gradient(180deg, var(--pearl) 0%, var(--brand-white) 100%);
+            position: relative;
+            color: var(--text-dark);
+        }
+
+        .categories-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--brand-yellow) 50%, transparent 100%);
+        }
+
+        .categories-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .categories-section .section-title {
+            background: linear-gradient(135deg, var(--brand-blue-dark) 0%, var(--royal-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+        }
+
+        .categories-section .section-subtitle {
+            color: var(--brand-blue);
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, rgba(0, 60, 113, 0.05) 0%, rgba(255, 199, 44, 0.05) 100%);
+            border: 1px solid rgba(0, 60, 113, 0.2);
+            color: var(--brand-blue);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            color: var(--brand-blue-dark);
+            border-color: var(--brand-yellow);
+            box-shadow: 0 4px 15px rgba(255, 199, 44, 0.3);
+        }
+
+        .tab-btn.active::before,
+        .tab-btn:hover::before {
+            width: 100%;
+        }
+
+        .category-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .category-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .amenity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .amenity-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--brand-white);
+            border: 1px solid rgba(0, 60, 113, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 36, 73, 0.05);
+        }
+
+        .amenity-item:hover {
+            background: linear-gradient(135deg, var(--brand-white) 0%, var(--champagne) 100%);
+            transform: translateX(10px);
+            border-color: var(--brand-yellow);
+            box-shadow: 
+                0 5px 20px rgba(255, 199, 44, 0.2),
+                0 0 0 1px var(--brand-yellow);
+        }
+
+        .amenity-icon-small {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+
+        .amenity-icon-small svg {
+            width: 100%;
+            height: 100%;
+            stroke: var(--brand-yellow);
+            fill: none;
+            filter: drop-shadow(0 2px 8px rgba(255, 199, 44, 0.3));
+        }
+
+        .amenity-name {
+            font-size: 0.95rem;
+            color: var(--brand-blue-dark);
+            line-height: 1.4;
+        }
+
+        /* Accessibility Section - Premium Blue */
+        .accessibility-section {
+            padding: 8rem 3rem;
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--midnight-blue) 50%, var(--brand-blue-dark) 100%);
+            position: relative;
+        }
+
+        .accessibility-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 199, 44, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(74, 144, 226, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .accessibility-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .accessibility-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .accessibility-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--brand-white);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-shadow: 0 4px 20px rgba(0, 36, 73, 0.3);
+        }
+
+        .accessibility-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .accessibility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .accessibility-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 199, 44, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 199, 44, 0.2);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 36, 73, 0.1);
+        }
+
+        .accessibility-item:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 199, 44, 0.08) 100%);
+            box-shadow: 
+                0 10px 30px rgba(0, 36, 73, 0.2),
+                0 0 0 1px var(--brand-yellow);
+        }
+
+        .accessibility-icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+
+        .accessibility-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--brand-yellow);
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.4));
+        }
+
+        .accessibility-text {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* CTA Section - Premium Gradient */
+        .amenities-cta {
+            padding: 6rem 3rem;
+            background: linear-gradient(135deg, var(--midnight-blue) 0%, var(--brand-blue) 50%, var(--royal-blue) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .amenities-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 199, 44, 0.08) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            text-shadow: 0 4px 20px rgba(0, 36, 73, 0.3);
+        }
+
+        .cta-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.3rem 3.2rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 50%, var(--brand-yellow) 100%);
+            color: var(--brand-blue-dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            box-shadow: 
+                0 4px 15px rgba(255, 199, 44, 0.35),
+                0 15px 50px rgba(255, 199, 44, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -3px 10px rgba(0, 36, 73, 0.1);
+            text-shadow: 0 1px 2px rgba(0, 36, 73, 0.15);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.4) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            transform: translateX(-100%) skewX(-45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 6px 25px rgba(255, 199, 44, 0.5),
+                0 20px 60px rgba(255, 199, 44, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -4px 15px rgba(0, 36, 73, 0.15);
+            background: linear-gradient(135deg, var(--brand-yellow-bright) 0%, var(--brand-yellow) 50%, var(--brand-yellow-bright) 100%);
+        }
+
+        .cta-button:hover::before {
+            transform: translateX(100%) skewX(-45deg);
+        }
+
+        /* Footer - Matching index.html */
+        footer {
+            padding: 5rem 3rem 2rem;
+            background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--brand-blue-dark) 100%);
+            border-top: 1px solid rgba(255, 199, 44, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.3));
+        }
+
+        .footer-description {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-yellow);
+            padding-left: 0.5rem;
+            text-shadow: 0 2px 10px rgba(255, 199, 44, 0.3);
+        }
+
+        .footer-bottom {
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 199, 44, 0.1);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            nav.scrolled {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-container {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .amenities-hero {
+                height: auto;
+                min-height: 50vh;
+                padding: 0 0.8rem;
+            }
+
+            .hero-content {
+                padding: 6rem 0.8rem 4rem;
+            }
+
+            .featured-amenities,
+            .categories-section,
+            .accessibility-section {
+                padding: 3rem 1rem;
+            }
+
+            .amenities-cta {
+                padding: 3rem 1rem;
+            }
+
+            .featured-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .category-tabs {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.8rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .tab-btn {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .amenity-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .accessibility-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Noise Texture -->
+    <div class="noise"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">DAYS INN NASA</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="guestrooms.html" class="nav-link">Guest Rooms</a></li>
+                <li><a href="amenities.html" class="nav-link active">Amenities</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="hotel-policies-page.html" class="nav-link">Hotel Policies</a></li>
+                <li><a href="hotel-reviews-page.html" class="nav-link">Reviews</a></li>
+                <li><a href="specials-page.html" class="nav-link">Specials</a></li>
+                <li><button class="book-now" onclick="window.open('https://www.wyndhamhotels.com/hotel/15443', '_blank')">Book Now</button></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="amenities-hero">
+        <div class="hero-content">
+            <div class="hero-subtitle">Exceptional Comfort & Convenience</div>
+            <h1 class="hero-title">Hotel Amenities</h1>
+            <p class="hero-description">
+                Discover our comprehensive range of amenities designed to make your stay comfortable, productive, and memorable
+            </p>
+        </div>
+    </section>
+
+    <!-- Featured Amenities Section -->
+    <section class="featured-amenities">
+        <div class="featured-container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Amenities</h2>
+                <p class="section-subtitle">Experience the best of what we have to offer</p>
+            </div>
+            <div class="featured-grid">
+                <div class="featured-card">
+                    <div class="featured-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="pool-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffc72c;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#4a90e2;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <rect x="10" y="35" width="80" height="50" rx="5" fill="url(#pool-gradient)" opacity="0.3"/>
+                            <path d="M15 45 Q25 40, 35 45 T55 45 T75 45 T85 45" stroke="#4a90e2" stroke-width="2" fill="none" opacity="0.8">
+                                <animate attributeName="d" values="M15 45 Q25 40, 35 45 T55 45 T75 45 T85 45;M15 45 Q25 50, 35 45 T55 45 T75 45 T85 45;M15 45 Q25 40, 35 45 T55 45 T75 45 T85 45" dur="3s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M15 55 Q25 60, 35 55 T55 55 T75 55 T85 55" stroke="#4a90e2" stroke-width="2" fill="none" opacity="0.6">
+                                <animate attributeName="d" values="M15 55 Q25 60, 35 55 T55 55 T75 55 T85 55;M15 55 Q25 50, 35 55 T55 55 T75 55 T85 55;M15 55 Q25 60, 35 55 T55 55 T75 55 T85 55" dur="3s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M15 65 Q25 70, 35 65 T55 65 T75 65 T85 65" stroke="#4a90e2" stroke-width="2" fill="none" opacity="0.4">
+                                <animate attributeName="d" values="M15 65 Q25 70, 35 65 T55 65 T75 65 T85 65;M15 65 Q25 60, 35 65 T55 65 T75 65 T85 65;M15 65 Q25 70, 35 65 T55 65 T75 65 T85 65" dur="3s" repeatCount="indefinite"/>
+                            </path>
+                            <circle cx="50" cy="25" r="5" fill="#ffc72c" opacity="0.8"/>
+                            <path d="M45 28 L50 32 L55 28" stroke="#ffc72c" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="featured-title">Indoor Heated Pool</h3>
+                    <p class="featured-description">
+                        Enjoy year-round swimming in our pristine indoor heated pool. Perfect for relaxation after a long day of travel or exploration, our pool area provides a serene environment for both leisure and exercise.
+                    </p>
+                </div>
+                <div class="featured-card">
+                    <div class="featured-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="breakfast-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffc72c;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ffe380;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M25 35 C25 30, 30 25, 35 25 L55 25 C60 25, 65 30, 65 35 L65 55 C65 60, 60 65, 55 65 L35 65 C30 65, 25 60, 25 55 Z" fill="url(#breakfast-gradient)" opacity="0.3"/>
+                            <path d="M65 40 L70 40 C75 40, 78 43, 78 48 C78 53, 75 56, 70 56 L65 56" stroke="#ffc72c" stroke-width="2" fill="none"/>
+                            <path d="M35 20 Q37 15, 35 10 Q33 5, 35 0" stroke="#ffc72c" stroke-width="1.5" fill="none" opacity="0.6">
+                                <animate attributeName="d" values="M35 20 Q37 15, 35 10 Q33 5, 35 0;M35 20 Q33 15, 35 10 Q37 5, 35 0;M35 20 Q37 15, 35 10 Q33 5, 35 0" dur="4s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M45 20 Q47 15, 45 10 Q43 5, 45 0" stroke="#ffc72c" stroke-width="1.5" fill="none" opacity="0.6">
+                                <animate attributeName="d" values="M45 20 Q47 15, 45 10 Q43 5, 45 0;M45 20 Q43 15, 45 10 Q47 5, 45 0;M45 20 Q47 15, 45 10 Q43 5, 45 0" dur="4s" begin="0.5s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M55 20 Q57 15, 55 10 Q53 5, 55 0" stroke="#ffc72c" stroke-width="1.5" fill="none" opacity="0.6">
+                                <animate attributeName="d" values="M55 20 Q57 15, 55 10 Q53 5, 55 0;M55 20 Q53 15, 55 10 Q57 5, 55 0;M55 20 Q57 15, 55 10 Q53 5, 55 0" dur="4s" begin="1s" repeatCount="indefinite"/>
+                            </path>
+                            <ellipse cx="50" cy="75" rx="35" ry="8" fill="#ffe380" opacity="0.5"/>
+                            <path d="M40 70 Q45 65, 50 70 Q55 65, 60 70" fill="#ffc72c" opacity="0.8"/>
+                        </svg>
+                    </div>
+                    <h3 class="featured-title">Grab & Go Breakfast</h3>
+                    <p class="featured-description">
+                        Start your day right with our complimentary Grab & Go breakfast menu. Includes donuts, granola bars, yogurt along with juice and coffee to fuel your Houston adventures.
+                    </p>
+                </div>
+                <div class="featured-card">
+                    <div class="featured-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="business-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffc72c;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ffe380;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <rect x="20" y="20" width="60" height="40" rx="3" fill="url(#business-gradient)" opacity="0.3"/>
+                            <rect x="25" y="25" width="50" height="30" fill="#003c71" opacity="0.2"/>
+                            <rect x="30" y="30" width="20" height="3" fill="#ffc72c" opacity="0.8"/>
+                            <rect x="30" y="36" width="40" height="2" fill="#ffe380" opacity="0.6"/>
+                            <rect x="30" y="40" width="40" height="2" fill="#ffe380" opacity="0.6"/>
+                            <rect x="30" y="44" width="30" height="2" fill="#ffe380" opacity="0.6"/>
+                            <rect x="47" y="60" width="6" height="15" fill="#ffc72c" opacity="0.8"/>
+                            <rect x="35" y="75" width="30" height="4" rx="2" fill="#ffc72c" opacity="0.8"/>
+                            <rect x="25" y="82" width="50" height="12" rx="2" fill="#ffe380" opacity="0.6"/>
+                            <rect x="28" y="85" width="44" height="6" fill="#ffc72c" opacity="0.3"/>
+                            <circle cx="85" cy="15" r="8" fill="none" stroke="#ffc72c" stroke-width="2" opacity="0.8">
+                                <animate attributeName="r" values="8;10;8" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <path d="M82 15 L85 15 L85 18" stroke="#ffc72c" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="featured-title">WiFi</h3>
+                    <p class="featured-description">
+                        Stay connected throughout your stay with our complimentary high-speed WiFi. Available in all guest rooms and common areas, ensuring you can work, stream, or stay in touch with ease.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Categories Section -->
+    <section class="categories-section">
+        <div class="categories-container">
+            <div class="section-header">
+                <h2 class="section-title">Complete Amenities List</h2>
+                <p class="section-subtitle">Everything you need for a comfortable stay</p>
+            </div>
+            
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="general">General</button>
+                <button class="tab-btn" data-category="room">In-Room</button>
+                <button class="tab-btn" data-category="laundry">Guest Laundry</button>
+                <button class="tab-btn" data-category="parking">Parking</button>
+            </div>
+
+            <div class="category-content active" id="general">
+                <div class="amenity-grid">
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><path d="M8.5 14.5L4 19l1.5 1.5L10 16m0-2l-1.5-1.5L2 19l1.5 1.5L10 14m4-6.5L19 2l1.5 1.5L16 8m2 0l1.5 1.5L13 16l-1.5-1.5L18 8M5 8l1.5 1.5L13 3l1.5-1.5L8 8z" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Free WiFi Throughout Property</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"/><path d="M12 6v6l4 2" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                        <span class="amenity-name">24/7 Virtual Front Desk</span>
+                    </div>
+
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke-width="2"/><circle cx="9" cy="7" r="4" stroke-width="2"/><path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke-width="2"/><path d="M16 3.13a4 4 0 0 1 0 7.75" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Multilingual Staff</span>
+                    </div>
+
+
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                        <span class="amenity-name">Concierge Services</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke-width="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Safety Deposit Box</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-content" id="room">
+                <div class="amenity-grid">
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" stroke-width="2"/><rect x="6" y="11" width="12" height="6" fill="#ffc72c" opacity="0.3"/></svg>
+                        </div>
+                        <span class="amenity-name">Flat Screen Television</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><path d="M18 2H6v7h12V2z" stroke-width="2"/><path d="M12 9v13" stroke-width="2"/><circle cx="12" cy="15" r="2" fill="#ffc72c"/></svg>
+                        </div>
+                        <span class="amenity-name">Refrigerator</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="1" stroke-width="2"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke-width="2"/><circle cx="12" cy="14" r="2" fill="#ffc72c" opacity="0.6"/></svg>
+                        </div>
+                        <span class="amenity-name">Microwave</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><path d="M18 10h-4l-2 3l-2-3H6" stroke-width="2"/><path d="M6 7v13l6-2l6 2V7" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Coffee/Tea Maker</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><path d="M20 16v1a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-1" stroke-width="2"/><path d="M12 4v8" stroke-width="2"/><path d="M6 12h12a1 1 0 0 1 1 1v3H5v-3a1 1 0 0 1 1-1z" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Hair Dryer</span>
+                    </div>
+
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"/><path d="M12 6v6l4 2" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                        <span class="amenity-name">Alarm Clock</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Kitchenettes (Selected Rooms)</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2" stroke-width="2"/><path d="M12 7v10" stroke-width="2"/><circle cx="12" cy="12" r="8" stroke-width="2"/><path d="M12 7a5 5 0 0 1 5 5" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Ceiling Fan</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-width="2" fill="none"/></svg>
+                        </div>
+                        <span class="amenity-name">Air Conditioning</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8" stroke-width="2"/><path d="M3.27 6.96l8.73 5.04l8.73-5.04" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Iron & Ironing Board</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2" stroke-width="2"/><path d="M8 8v-2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Wetbar</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2" stroke-width="2"/><path d="M8 8v-2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Headboard with Built-in Outlets</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2" stroke-width="2"/><path d="M8 8v-2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">In-Room Safe</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-content" id="laundry">
+                <div class="amenity-grid">
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width="2"/><path d="M8 12h8" stroke-width="2"/><path d="M8 16h5" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Washer & Dryer Set (2)</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-width="2"/><polyline points="14 2 14 8 20 8" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Detergent Dispenser</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Fabric Softener Dispenser</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-content" id="parking">
+                <div class="amenity-grid">
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="15" rx="2" stroke-width="2"/><circle cx="7.5" cy="18" r="1.5" fill="#ffc72c"/><circle cx="16.5" cy="18" r="1.5" fill="#ffc72c"/><path d="M5 12h14" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Free Parking</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><rect x="1" y="6" width="22" height="12" rx="2" stroke-width="2"/><circle cx="6" cy="15" r="2" fill="#ffc72c"/><circle cx="18" cy="15" r="2" fill="#ffc72c"/><path d="M6 6v-2" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Bus Parking</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><path d="M1 10h6v11H1z" stroke-width="2"/><path d="M7 10h14l2 3v8h-2" stroke-width="2"/><circle cx="10" cy="19" r="2" fill="#ffc72c"/><circle cx="19" cy="19" r="2" fill="#ffc72c"/></svg>
+                        </div>
+                        <span class="amenity-name">Truck Parking</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="9" width="13" height="10" rx="2" stroke-width="2"/><path d="M16 11h4l2 2v6" stroke-width="2"/><circle cx="7" cy="20" r="1.5" fill="#ffc72c"/><circle cx="20" cy="20" r="1.5" fill="#ffc72c"/><path d="M8 9V6" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">RV Parking</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="8" rx="1" stroke-width="2"/><path d="M9 11V9" stroke-width="2"/><path d="M15 11V9" stroke-width="2"/><circle cx="8" cy="19" r="1" fill="#ffc72c"/><circle cx="16" cy="19" r="1" fill="#ffc72c"/></svg>
+                        </div>
+                        <span class="amenity-name">Trailer Parking</span>
+                    </div>
+                    <div class="amenity-item">
+                        <div class="amenity-icon-small">
+                            <svg viewBox="0 0 24 24"><path d="M19 12h-2a3 3 0 0 0-3 3v8h8v-8a3 3 0 0 0-3-3z" stroke-width="2"/><path d="M3 12h2a3 3 0 0 1 3 3v8H0v-8a3 3 0 0 1 3-3z" stroke-width="2"/><path d="M12 1v11" stroke-width="2"/></svg>
+                        </div>
+                        <span class="amenity-name">Accessible Parking</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- CTA Section -->
+    <section class="amenities-cta">
+        <div class="cta-content">
+            <h2 class="cta-title">Experience Comfort & Convenience</h2>
+            <p class="cta-text">
+                With our comprehensive amenities and dedication to service, your stay at Days Inn & Suites NASA will exceed your expectations
+            </p>
+            <a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank" class="cta-button">Reserve Your Room</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">DAYS INN & SUITES NASA</div>
+                <p class="footer-description">
+                    One of the area's best hotels in Webster, TX near Clear Lake and within the Houston metropolitan area. Offering location convenience, affordability, and comfort with true Southern Texas hospitality.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Hotel Features</h4>
+                <ul class="footer-links">
+                    <li><a href="guestrooms.html">63 Guest Rooms</a></li>
+                    <li><a href="gallery.html">Photo Gallery</a></li>
+                    <li><a href="#">Free Grab & Go Breakfast</a></li>
+                    <li><a href="#">Indoor Heated Pool</a></li>
+                    <li><a href="#">Business Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Nearby Attractions</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#location">NASA Johnson Space Center</a></li>
+                    <li><a href="index.html#location">Kemah Boardwalk</a></li>
+                    <li><a href="index.html#location">Schlitterbahn Galveston</a></li>
+                    <li><a href="index.html#location">Gulf Greyhound Park</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Guest Services</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#contact">24/7 Virtual Front Desk</a></li>
+                    <li><a href="#">Express Check-In/Out</a></li>
+                    <li><a href="#">Multilingual Staff</a></li>
+                    <li><a href="hotel-policies-page.html">Hotel Policies</a></li>
+                    <li><a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank">Make a Reservation</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Days Inn & Suites NASA. 201 North Texas Ave, Webster, Texas 77598 | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            
+            // Add visible class for animation
+            if (navLinks.classList.contains('active')) {
+                setTimeout(() => navLinks.classList.add('visible'), 10);
+                document.body.style.overflow = 'hidden';
+            } else {
+                navLinks.classList.remove('visible');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link, .book-now').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active', 'visible');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active', 'visible');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Category Tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const categoryContents = document.querySelectorAll('.category-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const category = btn.getAttribute('data-category');
+                
+                // Remove active class from all
+                tabBtns.forEach(b => b.classList.remove('active'));
+                categoryContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked
+                btn.classList.add('active');
+                document.getElementById(category).classList.add('active');
+            });
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.featured-card, .amenity-item, .accessibility-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

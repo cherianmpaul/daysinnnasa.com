@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Days Inn & Suites NASA | Webster, Texas Hotel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@200;300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Days Inn Brand Colors */
+            --brand-blue: #003c71;
+            --brand-blue-dark: #002449;
+            --brand-blue-light: #0054a6;
+            --brand-yellow: #ffc72c;
+            --brand-yellow-bright: #ffdd00;
+            --brand-yellow-soft: #ffe380;
+            --brand-white: #ffffff;
+            
+            /* Luxury Variations */
+            --midnight-blue: #001f3f;
+            --royal-blue: #004080;
+            --sky-blue: #4a90e2;
+            --champagne: #fff5d6;
+            --pearl: #fafafa;
+            --silver: #e8e8e8;
+            
+            /* Functional Colors */
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-blue: rgba(0, 60, 113, 0.05);
+            --text-light: rgba(255, 255, 255, 0.95);
+            --text-muted: rgba(255, 255, 255, 0.75);
+            --text-dark: #002449;
+            --shadow: rgba(0, 36, 73, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--brand-blue) 100%);
+            color: var(--brand-white);
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+            min-width: 320px;
+        }
+
+        /* Premium Noise Texture */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.02;
+            z-index: 1;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 199, 44, 0.01) 35px, rgba(255, 199, 44, 0.01) 70px),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="noise"><feTurbulence baseFrequency="0.9"/></filter><rect width="200" height="200" filter="url(%23noise)" opacity="0.4"/></svg>');
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--midnight-blue) 0%, var(--brand-blue) 100%);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.1em;
+            animation: pulse 2s ease infinite;
+            filter: drop-shadow(0 4px 20px rgba(255, 199, 44, 0.3));
+        }
+
+        .loader-bar {
+            width: 300px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+        }
+
+        .loader-progress {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            animation: load 2s ease forwards;
+            box-shadow: 0 0 20px rgba(255, 199, 44, 0.5);
+        }
+
+        @keyframes load {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                opacity: 0.8; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.02);
+            }
+        }
+
+        /* Premium Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(180deg, rgba(0, 31, 63, 0.95) 0%, rgba(0, 60, 113, 0.9) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 199, 44, 0.15);
+        }
+
+        nav.scrolled {
+            background: linear-gradient(180deg, rgba(0, 36, 73, 0.98) 0%, rgba(0, 60, 113, 0.95) 100%);
+            backdrop-filter: blur(30px) saturate(200%);
+            padding: 1rem 3rem;
+            border-bottom: 1px solid rgba(255, 199, 44, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 36, 73, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--brand-white) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.2));
+        }
+
+        .logo:hover {
+            filter: drop-shadow(0 4px 20px rgba(255, 199, 44, 0.4));
+            transform: translateY(-1px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--brand-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            position: relative;
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 4px rgba(0, 36, 73, 0.3);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            transition: width 0.3s ease;
+            box-shadow: 0 2px 10px rgba(255, 199, 44, 0.5);
+        }
+
+        .nav-link:hover {
+            color: var(--brand-yellow-soft);
+            transform: translateY(-1px);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .book-now {
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 50%, var(--brand-yellow) 100%);
+            color: var(--brand-blue-dark);
+            border: 2px solid transparent;
+            padding: 0.9rem 2.2rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 3px;
+            box-shadow: 
+                0 2px 10px rgba(255, 199, 44, 0.3),
+                0 10px 40px rgba(255, 199, 44, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 10px rgba(0, 36, 73, 0.1);
+            text-shadow: 0 1px 2px rgba(0, 36, 73, 0.2);
+            transform-style: preserve-3d;
+        }
+
+        .book-now::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            transform: translateX(-100%) skewX(-45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .book-now::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .book-now:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 4px 20px rgba(255, 199, 44, 0.5),
+                0 15px 50px rgba(255, 199, 44, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -3px 15px rgba(0, 36, 73, 0.15);
+            background: linear-gradient(135deg, var(--brand-yellow-bright) 0%, var(--brand-yellow) 50%, var(--brand-yellow-bright) 100%);
+            border-color: rgba(255, 199, 44, 0.3);
+        }
+
+        .book-now:hover::before {
+            transform: translateX(100%) skewX(-45deg);
+        }
+
+        .book-now:hover::after {
+            opacity: 1;
+        }
+
+        .book-now:active {
+            transform: translateY(-1px) scale(1.01);
+            box-shadow: 
+                0 2px 10px rgba(255, 199, 44, 0.4),
+                0 8px 25px rgba(255, 199, 44, 0.2),
+                inset 0 2px 5px rgba(0, 36, 73, 0.2);
+        }
+
+        /* Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-white) 100%);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .nav-links.active {
+            display: flex !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0, 31, 63, 0.98) 0%, rgba(0, 60, 113, 0.98) 100%);
+            backdrop-filter: blur(30px);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1000;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .nav-links.active.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section - Luxury Edition */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--midnight-blue) 0%, var(--brand-blue) 50%, var(--royal-blue) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 199, 44, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            z-index: 1;
+            animation: pulse-bg 10s ease infinite;
+        }
+
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.25;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            animation: kenBurns 20s ease-in-out infinite;
+            filter: contrast(1.1) brightness(1.05);
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 1000px;
+            padding: 0 2rem;
+        }
+
+        .hero-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.1s forwards;
+            font-weight: 500;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.3));
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.2s forwards;
+            font-weight: 700;
+            text-shadow: 0 4px 20px rgba(0, 36, 73, 0.3);
+        }
+
+        .hero-title span {
+            display: block;
+            font-size: 0.35em;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            margin-top: 1rem;
+            background: linear-gradient(90deg, var(--brand-yellow-soft) 0%, var(--brand-white) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeInUp 1s 0.3s forwards;
+            text-shadow: 0 2px 10px rgba(0, 36, 73, 0.3);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 1s 0.4s forwards;
+        }
+
+        .btn {
+            padding: 1.3rem 3.2rem;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            display: inline-block;
+            transform-style: preserve-3d;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 50%, var(--brand-yellow) 100%);
+            color: var(--brand-blue-dark);
+            border: 2px solid transparent;
+            box-shadow: 
+                0 4px 15px rgba(255, 199, 44, 0.35),
+                0 15px 50px rgba(255, 199, 44, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -3px 10px rgba(0, 36, 73, 0.1);
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 36, 73, 0.15);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.4) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            transform: translateX(-100%) skewX(-45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 6px 25px rgba(255, 199, 44, 0.5),
+                0 20px 60px rgba(255, 199, 44, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -4px 15px rgba(0, 36, 73, 0.15);
+            background: linear-gradient(135deg, var(--brand-yellow-bright) 0%, var(--brand-yellow) 50%, var(--brand-yellow-bright) 100%);
+        }
+
+        .btn-primary:hover::before {
+            transform: translateX(100%) skewX(-45deg);
+        }
+
+        .btn-primary:hover::after {
+            width: 300%;
+            height: 300%;
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px) scale(1.01);
+            box-shadow: 
+                0 3px 15px rgba(255, 199, 44, 0.4),
+                0 10px 30px rgba(255, 199, 44, 0.25),
+                inset 0 2px 8px rgba(0, 36, 73, 0.2);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(255, 255, 255, 0.05) 50%, 
+                rgba(255, 255, 255, 0.1) 100%);
+            color: var(--brand-white);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 
+                0 4px 15px rgba(0, 36, 73, 0.2),
+                0 10px 40px rgba(0, 36, 73, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -2px 10px rgba(0, 36, 73, 0.2);
+            text-shadow: 0 2px 4px rgba(0, 36, 73, 0.3);
+            font-weight: 500;
+        }
+
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                transparent 0%, 
+                rgba(255, 199, 44, 0.1) 50%, 
+                transparent 100%);
+            transform: translateX(-100%) skewX(-45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .btn-secondary::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, transparent 50%, var(--brand-yellow) 100%);
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, 
+                rgba(255, 199, 44, 0.15) 0%, 
+                rgba(255, 199, 44, 0.1) 50%, 
+                rgba(255, 199, 44, 0.15) 100%);
+            border-color: rgba(255, 199, 44, 0.5);
+            color: var(--brand-yellow-soft);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 6px 25px rgba(255, 199, 44, 0.3),
+                0 15px 50px rgba(0, 36, 73, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -3px 15px rgba(0, 36, 73, 0.1);
+        }
+
+        .btn-secondary:hover::before {
+            transform: translateX(100%) skewX(-45deg);
+        }
+
+        .btn-secondary:hover::after {
+            opacity: 0.3;
+        }
+
+        .btn-secondary:active {
+            transform: translateY(-1px) scale(1.01);
+            box-shadow: 
+                0 3px 15px rgba(255, 199, 44, 0.25),
+                0 8px 25px rgba(0, 36, 73, 0.15),
+                inset 0 2px 5px rgba(0, 36, 73, 0.3);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 2;
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--brand-yellow);
+            fill: none;
+            stroke-width: 2;
+            filter: drop-shadow(0 4px 10px rgba(255, 199, 44, 0.4));
+        }
+
+        @keyframes pulse-bg {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes kenBurns {
+            0% { transform: scale(1) translate(0, 0); }
+            25% { transform: scale(1.08) translate(-2%, -1%); }
+            50% { transform: scale(1.1) translate(2%, 1%); }
+            75% { transform: scale(1.05) translate(-1%, 2%); }
+            100% { transform: scale(1) translate(0, 0); }
+        }
+
+        /* About Section - Premium Blue */
+        .about {
+            padding: 8rem 3rem;
+            background: 
+                linear-gradient(180deg, var(--brand-blue) 0%, var(--midnight-blue) 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23003c71" opacity="0.03"/><circle cx="50" cy="50" r="1" fill="%23ffc72c" opacity="0.1"/></svg>');
+            position: relative;
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-content {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 1s ease;
+        }
+
+        .about-content.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .section-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            filter: drop-shadow(0 2px 8px rgba(255, 199, 44, 0.3));
+        }
+
+        .about-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+            font-weight: 600;
+            text-shadow: 0 4px 20px rgba(0, 36, 73, 0.3);
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 199, 44, 0.05) 100%);
+            border: 1px solid rgba(255, 199, 44, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .stat-item:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 199, 44, 0.1) 100%);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 199, 44, 0.2);
+            border-color: var(--brand-yellow);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-white) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.3));
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .about-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .about-visual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 199, 44, 0.1) 50%, transparent 70%);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .about-visual:hover::before {
+            opacity: 1;
+        }
+
+        .about-image {
+            width: 100%;
+            height: auto;
+            max-width: 600px;
+            min-height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 
+                0 25px 50px rgba(0, 36, 73, 0.4),
+                0 0 0 1px rgba(255, 199, 44, 0.2),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: brightness(1.05) contrast(1.1);
+        }
+
+        .about-image:hover {
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 
+                0 35px 70px rgba(0, 36, 73, 0.5),
+                0 0 0 2px var(--brand-yellow),
+                0 0 40px rgba(255, 199, 44, 0.3);
+        }
+
+        /* Rooms Section - Elegant White */
+        .rooms {
+            padding: 8rem 3rem;
+            background: linear-gradient(180deg, var(--pearl) 0%, var(--brand-white) 100%);
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .rooms::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--brand-yellow) 50%, transparent 100%);
+        }
+
+        .rooms-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 5rem;
+        }
+
+        .rooms-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--brand-blue-dark) 0%, var(--royal-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .rooms-subtitle {
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: var(--brand-blue);
+            line-height: 1.6;
+        }
+
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .room-card {
+            background: var(--brand-white);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 36, 73, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 60, 113, 0.1);
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                0 20px 40px rgba(0, 36, 73, 0.15),
+                0 0 0 2px var(--brand-yellow);
+        }
+
+        .room-image {
+            height: 300px;
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .room-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.3s ease;
+        }
+
+        .room-card:hover .room-img {
+            transform: scale(1.05);
+        }
+
+        .room-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            color: var(--brand-blue-dark);
+            padding: 0.5rem 1.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 199, 44, 0.4);
+        }
+
+        .room-details {
+            padding: 2.5rem;
+        }
+
+        .room-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--brand-blue-dark);
+        }
+
+        .room-desc {
+            color: var(--brand-blue);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .room-feature {
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, rgba(0, 60, 113, 0.05) 0%, rgba(255, 199, 44, 0.05) 100%);
+            font-size: 0.8rem;
+            color: var(--brand-blue);
+            border: 1px solid rgba(0, 60, 113, 0.2);
+            font-weight: 500;
+            border-radius: 20px;
+        }
+
+        /* Amenities Section - Royal Blue */
+        .amenities {
+            padding: 8rem 3rem;
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--midnight-blue) 50%, var(--brand-blue-dark) 100%);
+            position: relative;
+        }
+
+        .amenities::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(255, 199, 44, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 70% 80%, rgba(74, 144, 226, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .amenities-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .amenities-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            color: var(--brand-white);
+            font-weight: 600;
+            text-shadow: 0 4px 20px rgba(0, 36, 73, 0.3);
+        }
+
+        .amenities-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 4rem;
+            font-weight: 300;
+        }
+
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .amenity-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 199, 44, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 199, 44, 0.2);
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.5s ease;
+            border-radius: 16px;
+        }
+
+        .amenity-card:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 199, 44, 0.08) 100%);
+            transform: translateY(-10px);
+            box-shadow: 
+                0 20px 40px rgba(0, 36, 73, 0.3),
+                0 0 0 1px var(--brand-yellow);
+        }
+
+        .amenity-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .amenity-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .amenity-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            filter: drop-shadow(0 2px 8px rgba(255, 199, 44, 0.3));
+        }
+
+        .amenity-card p {
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Location Section */
+        .location {
+            padding: 8rem 3rem;
+            background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--brand-blue) 50%, var(--royal-blue) 100%);
+            position: relative;
+        }
+
+        .location-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .location-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .location-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            color: var(--brand-white);
+            font-weight: 600;
+            text-shadow: 0 4px 20px rgba(0, 36, 73, 0.3);
+        }
+
+        .location-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .location-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .location-info {
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 199, 44, 0.03) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 199, 44, 0.2);
+            border-radius: 16px;
+        }
+
+        .location-list {
+            list-style: none;
+        }
+
+        .location-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 199, 44, 0.1);
+        }
+
+        .location-item:last-child {
+            border-bottom: none;
+        }
+
+        .location-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--brand-yellow);
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+            filter: drop-shadow(0 2px 8px rgba(255, 199, 44, 0.4));
+        }
+
+        .location-details h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .location-details p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .map-container {
+            height: 500px;
+            background: var(--brand-blue-dark);
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 
+                0 10px 30px rgba(0, 36, 73, 0.3),
+                0 0 0 1px rgba(255, 199, 44, 0.2);
+        }
+
+        .map-wrapper {
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .map-wrapper iframe {
+            border-radius: 16px;
+        }
+
+        .map-actions {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .map-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 50%, var(--brand-yellow) 100%);
+            color: var(--brand-blue-dark);
+            text-decoration: none;
+            border-radius: 3px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 3px 12px rgba(255, 199, 44, 0.35),
+                0 10px 30px rgba(255, 199, 44, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 8px rgba(0, 36, 73, 0.1);
+            text-shadow: 0 1px 2px rgba(0, 36, 73, 0.1);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .map-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            transform: translateX(-100%) skewX(-45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .map-btn:hover {
+            background: linear-gradient(135deg, var(--brand-white) 0%, var(--champagne) 50%, var(--brand-white) 100%);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 5px 20px rgba(255, 199, 44, 0.5),
+                0 15px 40px rgba(255, 199, 44, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -3px 10px rgba(0, 36, 73, 0.1);
+            border-color: rgba(255, 199, 44, 0.3);
+        }
+
+        .map-btn:hover::before {
+            transform: translateX(100%) skewX(-45deg);
+        }
+
+        .map-btn:active {
+            transform: translateY(-1px) scale(1.01);
+            box-shadow: 
+                0 2px 10px rgba(255, 199, 44, 0.4),
+                0 8px 20px rgba(255, 199, 44, 0.2),
+                inset 0 2px 5px rgba(0, 36, 73, 0.2);
+        }
+
+        .map-btn svg {
+            stroke: currentColor;
+            fill: none;
+            transition: transform 0.3s ease;
+        }
+
+        .map-btn:hover svg {
+            transform: translateX(2px);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 3rem;
+            background: linear-gradient(180deg, var(--pearl) 0%, var(--brand-white) 100%);
+            color: var(--text-dark);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+        }
+
+        .contact-info {
+            padding: 3rem;
+            background: var(--brand-white);
+            box-shadow: 0 10px 30px rgba(0, 36, 73, 0.1);
+            border-radius: 16px;
+            border: 1px solid rgba(0, 60, 113, 0.1);
+        }
+
+        .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--brand-blue-dark) 0%, var(--royal-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--brand-blue);
+        }
+
+        .contact-item svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--brand-yellow);
+            fill: none;
+            filter: drop-shadow(0 2px 8px rgba(255, 199, 44, 0.3));
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(0, 60, 113, 0.02) 0%, rgba(255, 199, 44, 0.02) 100%);
+            border: 1px solid rgba(0, 60, 113, 0.2);
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--brand-yellow);
+            background: var(--brand-white);
+            box-shadow: 0 0 0 3px rgba(255, 199, 44, 0.1);
+        }
+
+        .form-group label {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: var(--brand-blue);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:focus + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            top: -0.5rem;
+            left: 0.5rem;
+            font-size: 0.8rem;
+            background: var(--brand-white);
+            padding: 0 0.5rem;
+            color: var(--brand-yellow);
+            font-weight: 500;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 50%, var(--brand-yellow) 100%);
+            color: var(--brand-blue-dark);
+            border: 2px solid transparent;
+            padding: 1.2rem 3rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 3px;
+            box-shadow: 
+                0 4px 15px rgba(255, 199, 44, 0.35),
+                0 15px 50px rgba(255, 199, 44, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -3px 10px rgba(0, 36, 73, 0.1);
+            text-shadow: 0 1px 2px rgba(0, 36, 73, 0.15);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.4) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            transform: translateX(-100%) skewX(-45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 60, 113, 0.2) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--royal-blue) 50%, var(--brand-blue) 100%);
+            color: var(--brand-white);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 6px 25px rgba(0, 36, 73, 0.4),
+                0 20px 60px rgba(0, 36, 73, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -4px 15px rgba(0, 0, 0, 0.2);
+            border-color: var(--brand-blue);
+        }
+
+        .submit-btn:hover::before {
+            transform: translateX(100%) skewX(-45deg);
+        }
+
+        .submit-btn:hover::after {
+            width: 300%;
+            height: 300%;
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px) scale(1.01);
+            box-shadow: 
+                0 3px 15px rgba(0, 36, 73, 0.3),
+                0 10px 30px rgba(0, 36, 73, 0.15),
+                inset 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 5rem 3rem 2rem;
+            background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--brand-blue-dark) 100%);
+            border-top: 1px solid rgba(255, 199, 44, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.3));
+        }
+
+        .footer-description {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-yellow);
+            padding-left: 0.5rem;
+            text-shadow: 0 2px 10px rgba(255, 199, 44, 0.3);
+        }
+
+        .footer-bottom {
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 199, 44, 0.1);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            nav.scrolled {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-container {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+                padding: 1.1rem 2.2rem;
+                font-size: 0.9rem;
+                margin: 0 auto;
+                display: block;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .about,
+            .rooms,
+            .amenities,
+            .location,
+            .contact {
+                padding: 3rem 1rem;
+            }
+
+            .about-container,
+            .location-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+                margin-top: 2rem;
+            }
+
+            .room-grid {
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
+            }
+
+            .amenities-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .map-container {
+                height: 300px;
+            }
+
+            .map-actions {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin-top: 1rem;
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .map-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 24px;
+            }
+
+            .submit-btn {
+                width: 100%;
+                padding: 1.1rem 2rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.6rem 0.8rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                padding: 1rem 1.8rem;
+                font-size: 0.85rem;
+                max-width: 280px;
+            }
+
+            .submit-btn {
+                padding: 1rem 1.8rem;
+                font-size: 0.9rem;
+            }
+
+            .map-btn {
+                padding: 12px 20px;
+                font-size: 0.85rem;
+            }
+
+            .about,
+            .rooms,
+            .amenities,
+            .location,
+            .contact {
+                padding: 2.5rem 0.8rem;
+            }
+
+            .about-title,
+            .rooms-title,
+            .amenities-title,
+            .location-title,
+            .contact-title {
+                font-size: clamp(1.8rem, 5vw, 2.2rem);
+            }
+
+            .room-details {
+                padding: 1.2rem;
+            }
+
+            .amenity-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .location-info {
+                padding: 1.5rem 1rem;
+            }
+
+            .contact-info {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Noise Texture -->
+    <div class="noise"></div>
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">DAYS INN NASA</div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">DAYS INN NASA</a>
+            <ul class="nav-links">
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="guestrooms.html" class="nav-link">Guest Rooms</a></li>
+                <li><a href="amenities.html" class="nav-link">Amenities</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="hotel-policies-page.html" class="nav-link">Hotel Policies</a></li>
+                <li><a href="hotel-reviews-page.html" class="nav-link">Reviews</a></li>
+                <li><a href="specials-page.html" class="nav-link">Specials</a></li>
+                <li><button class="book-now" onclick="window.open('https://www.wyndhamhotels.com/hotel/15443', '_blank')">Book Now</button></li>
+            </ul>
+            <button class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-slideshow">
+            <div class="hero-slide" style="background-image: url('./Images/index/main.jpg'); opacity: 1;"></div>
+            <div class="hero-slide" style="background-image: url('./Images/index/card1.avif');"></div>
+            <div class="hero-slide" style="background-image: url('./Images/index/card2.avif');"></div>
+            <div class="hero-slide" style="background-image: url('./Images/index/card3.avif');"></div>
+            <div class="hero-slide" style="background-image: url('./Images/index/card4.avif');"></div>
+            <div class="hero-slide" style="background-image: url('./Images/index/card5.avif');"></div>
+            <div class="hero-slide" style="background-image: url('./Images/index/card6.avif');"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-subtitle">Webster, Texas - Near NASA Johnson Space Center</div>
+            <h1 class="hero-title">
+                DAYS INN & SUITES
+                <span>Best Value Under The Sun</span>
+            </h1>
+            <p class="hero-description">
+                Experience true Southern Texas hospitality with 63 well-equipped units offering contemporary, clean, and comfortable lodging just 2.5 miles from NASA Johnson Space Center
+            </p>
+            <div class="hero-cta">
+                <a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank" class="btn btn-primary">Reserve Your Stay</a>
+                <a href="about.html" class="btn btn-secondary">Explore</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24">
+                <polyline points="7 10 12 15 17 10"></polyline>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-content">
+                <div class="section-label">Welcome to Days Inn NASA</div>
+                <h2 class="about-title">Your Gateway to Space Exploration and Houston Adventures</h2>
+                <p class="about-text">
+                    The Days Inn & Suites NASA in Webster, TX near Clear Lake and within the Houston metropolitan area is one of the area's best hotels offering location convenience, affordability, and comfort. With 63 suite style units, we offer contemporary, clean, and comfortable lodging with a friendly staff that wants to show you true Southern Texas Hospitality.
+                </p>
+                <p class="about-text">
+                    Conveniently situated off Interstate 45 with proximity to many Houston-area attractions. William P. Hobby Airport is 14 miles from our hotel and George Bush International Airport is also just a short drive away, making our hotel perfect for weary air travelers flying into the Houston area.
+                </p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">63</div>
+                        <div class="stat-label">Guest Rooms</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">2.5</div>
+                        <div class="stat-label">Miles to NASA</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Virtual Front Desk</div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-visual">
+                <img src="Images/index/main.jpg" alt="Days Inn NASA Hotel" class="about-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section class="rooms" id="rooms">
+        <div class="rooms-header">
+            <h2 class="rooms-title">Comfortable Accommodations</h2>
+            <p class="rooms-subtitle">
+                Spacious rooms with modern amenities and contemporary style featuring rare amenities like ceiling fans and wet bars
+            </p>
+        </div>
+        <div class="room-grid">
+            <!-- 1) 1st Flr King Non-Smoking -->
+            <div class="room-card" data-href="pages/NK2.html" role="link" tabindex="0">
+                <div class="room-image">
+                    <img src="Images/index/card3.avif" alt="1 King Bed Non-Smoking Room" class="room-img">
+                    <span class="room-badge">Non-Smoking</span>
+                </div>
+                <div class="room-details">
+                    <h3 class="room-name">1 King Bed, Non-Smoking</h3>
+                    <p class="room-desc">
+                        First floor, Free WiFi, free Grab & Go breakfast, mini-refrigerator, wet bar, microwave, air conditioning, coffee/tea maker, hair dryer, HDTV, bathroom amenities, pulsing shower heads, alarm clock, desk, iron, ironing board, ceiling fan, headboards with built in Outlets, LVP Flooring.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2) 1st Flr King Smoking -->
+            <div class="room-card" data-href="pages/K12.html" role="link" tabindex="0">
+                <div class="room-image">
+                    <img src="Images/index/card1.avif" alt="1 King Bed Smoking Room" class="room-img">
+                    <span class="room-badge">Smoking</span>
+                </div>
+                <div class="room-details">
+                    <h3 class="room-name">1 King Bed, Smoking</h3>
+                    <p class="room-desc">
+                        First floor room with Free WiFi, free Grab & Go breakfast, mini-refrigerator, wet bar, microwave, air conditioning, coffee/tea maker, hair dryer, HDTV, bathroom amenities, pulsing shower heads, alarm clock, desk, iron, ironing board, ceiling fan, headboards with built in Outlets, LVP Flooring.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3) 2nd Flr King Non-Smoking -->
+            <div class="room-card" data-href="pages/NK1.html" role="link" tabindex="0">
+                <div class="room-image">
+                    <img src="Images/index/card2.avif" alt="1 King Bed Second Floor Non-Smoking Room" class="room-img">
+                    <span class="room-badge">Non-Smoking</span>
+                </div>
+                <div class="room-details">
+                    <h3 class="room-name">1 King Bed, Second Floor, Interior Stairs Only, Non-Smoking</h3>
+                    <p class="room-desc">
+                        Second Floor, Free WiFi, free Grab & Go breakfast, mini-refrigerator, wet bar, microwave, air conditioning, coffee/tea maker, hair dryer, HDTV, bathroom amenities, pulsing shower heads, alarm clock, desk, iron, ironing board, ceiling fan, headboards with built in Outlets.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 4) 2nd Flr Queen Non-Smoking (Single Queen) -->
+            <div class="room-card" data-href="pages/NQ1.html" role="link" tabindex="0">
+                <div class="room-image">
+                    <img src="Images/guestrooms/card3.avif" alt="1 Queen Bed Second Floor Non-Smoking Room" class="room-img">
+                    <span class="room-badge">Non-Smoking</span>
+                </div>
+                <div class="room-details">
+                    <h3 class="room-name">1 Queen Bed, Second Floor, Non-Smoking</h3>
+                    <p class="room-desc">
+                        Second floor non-smoking room with one Queen bed. Features 40 inch HDTV w/HBO, coffee maker, microwave, fridge in a wetbar, iron/ironing board, ceiling fan, and work desk. Free WiFi included.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 5) 1st Flr 2 Queen Non-Smoking -->
+            <div class="room-card" data-href="pages/NQQ2.html" role="link" tabindex="0">
+                <div class="room-image">
+                    <img src="Images/index/card5.avif" alt="2 Queen Beds Non-Smoking Room" class="room-img">
+                    <span class="room-badge">Non-Smoking</span>
+                </div>
+                <div class="room-details">
+                    <h3 class="room-name">2 Queen Beds, Non-Smoking</h3>
+                    <p class="room-desc">
+                        First floor, Free WiFi, free Grab & Go breakfast, mini-refrigerator, wet bar, microwave, air conditioning, coffee/tea maker, hair dryer, HDTV, bathroom amenities, pulsing shower heads, alarm clock, desk, iron, ironing board, ceiling fan, headboards with built in Outlets, LVP Flooring.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 6) 2nd Flr 2 Queen Non-Smoking -->
+            <div class="room-card" data-href="pages/NQQ1.html" role="link" tabindex="0">
+                <div class="room-image">
+                    <img src="Images/index/card4.avif" alt="2 Queen Beds Second Floor Non-Smoking Room" class="room-img">
+                    <span class="room-badge">Non-Smoking</span>
+                </div>
+                <div class="room-details">
+                    <h3 class="room-name">2 Queen Beds, Second Floor, Interior Stairs Only, Non-Smoking</h3>
+                    <p class="room-desc">
+                        Second Floor, free WiFi, free Grab & Go breakfast, mini-refrigerator, wet bar, microwave, air conditioning, coffee/tea maker, hair dryer, HDTV, bathroom amenities, pulsing shower heads, alarm clock, desk, iron, ironing board, ceiling fan, headboards with built in Outlets.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 7) 2nd Flr King Suite -->
+            <div class="room-card" data-href="pages/SNK1.html" role="link" tabindex="0">
+                <div class="room-image">
+                    <img src="Images/index/card6.avif" alt="1 King Bed Studio Suite Non-Smoking Room" class="room-img">
+                    <span class="room-badge">Suite</span>
+                </div>
+                <div class="room-details">
+                    <h3 class="room-name">1 King Bed, Studio Suite, Second Floor, Interior Stairs Only, Non-Smoking</h3>
+                    <p class="room-desc">
+                        Second Floor, Free WiFi, free Grab & Go breakfast, sofa bed, sitting area, kitchenette, mini-refrigerator, wet bar, microwave, oven, air conditioning, coffee/tea maker, hair dryer, HDTV, bathroom amenities, pulsing shower heads, alarm clock, desk, iron, ironing board, ceiling fan, headboards with built in Outlets.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section class="amenities" id="amenities">
+        <div class="amenities-container">
+            <h2 class="amenities-title">Hotel Amenities</h2>
+            <p class="amenities-subtitle">Everything you need for a comfortable stay</p>
+            <div class="amenities-grid">
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="breakfast-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffc72c;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ffe380;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Coffee cup -->
+                            <path d="M25 35 C25 30, 30 25, 35 25 L55 25 C60 25, 65 30, 65 35 L65 55 C65 60, 60 65, 55 65 L35 65 C30 65, 25 60, 25 55 Z" fill="url(#breakfast-gradient)" opacity="0.9"/>
+                            <path d="M65 40 L70 40 C75 40, 78 43, 78 48 C78 53, 75 56, 70 56 L65 56" stroke="#ffc72c" stroke-width="2" fill="none"/>
+                            <!-- Steam -->
+                            <path d="M35 20 Q37 15, 35 10 Q33 5, 35 0" stroke="#ffc72c" stroke-width="1.5" fill="none" opacity="0.6"/>
+                            <path d="M45 20 Q47 15, 45 10 Q43 5, 45 0" stroke="#ffc72c" stroke-width="1.5" fill="none" opacity="0.6"/>
+                            <path d="M55 20 Q57 15, 55 10 Q53 5, 55 0" stroke="#ffc72c" stroke-width="1.5" fill="none" opacity="0.6"/>
+                            <!-- Plate -->
+                            <ellipse cx="50" cy="75" rx="35" ry="8" fill="#ffe380" opacity="0.5"/>
+                            <!-- Croissant -->
+                            <path d="M40 70 Q45 65, 50 70 Q55 65, 60 70" fill="#ffc72c" opacity="0.8"/>
+                        </svg>
+                    </div>
+                    <h3>Free Grab & Go Breakfast</h3>
+                    <p>Start your day with our complimentary Grab & Go breakfast menu including donuts, granola bars, yogurt along with juice and coffee</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="wifi-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffc72c;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ffe380;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <!-- WiFi signal waves -->
+                            <circle cx="50" cy="70" r="5" fill="url(#wifi-gradient)"/>
+                            <path d="M35 55 Q50 40, 65 55" stroke="#ffc72c" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.9"/>
+                            <path d="M25 45 Q50 25, 75 45" stroke="#ffc72c" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+                            <path d="M15 35 Q50 10, 85 35" stroke="#ffc72c" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+                            <!-- Signal dots -->
+                            <circle cx="50" cy="50" r="2" fill="#ffc72c" opacity="0.6">
+                                <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                    </div>
+                    <h3>Free WiFi</h3>
+                    <p>Complimentary high-speed internet access throughout the property and in all guest rooms</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="pool-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffc72c;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#4a90e2;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Pool -->
+                            <rect x="10" y="40" width="80" height="45" rx="5" fill="url(#pool-gradient)" opacity="0.3"/>
+                            <!-- Water waves -->
+                            <path d="M15 50 Q25 45, 35 50 T55 50 T75 50 T85 50" stroke="#4a90e2" stroke-width="2" fill="none" opacity="0.8">
+                                <animate attributeName="d" values="M15 50 Q25 45, 35 50 T55 50 T75 50 T85 50;M15 50 Q25 55, 35 50 T55 50 T75 50 T85 50;M15 50 Q25 45, 35 50 T55 50 T75 50 T85 50" dur="3s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M15 60 Q25 65, 35 60 T55 60 T75 60 T85 60" stroke="#4a90e2" stroke-width="2" fill="none" opacity="0.6">
+                                <animate attributeName="d" values="M15 60 Q25 65, 35 60 T55 60 T75 60 T85 60;M15 60 Q25 55, 35 60 T55 60 T75 60 T85 60;M15 60 Q25 65, 35 60 T55 60 T75 60 T85 60" dur="3s" repeatCount="indefinite"/>
+                            </path>
+                            <!-- Swimmer -->
+                            <circle cx="50" cy="25" r="6" fill="#ffc72c" opacity="0.8"/>
+                            <path d="M44 30 L50 35 L56 30" stroke="#ffc72c" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>Indoor Heated Pool</h3>
+                    <p>Relax and unwind in our indoor heated pool, perfect for swimming year-round</p>
+                </div>
+                
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="clock-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffc72c;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ffe380;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Clock face -->
+                            <circle cx="50" cy="50" r="35" fill="none" stroke="url(#clock-gradient)" stroke-width="3"/>
+                            <circle cx="50" cy="50" r="30" fill="url(#clock-gradient)" opacity="0.1"/>
+                            <!-- Hour markers -->
+                            <rect x="48" y="20" width="4" height="8" fill="#ffc72c" opacity="0.8"/>
+                            <rect x="48" y="72" width="4" height="8" fill="#ffc72c" opacity="0.8"/>
+                            <rect x="20" y="48" width="8" height="4" fill="#ffc72c" opacity="0.8"/>
+                            <rect x="72" y="48" width="8" height="4" fill="#ffc72c" opacity="0.8"/>
+                            <!-- Clock hands -->
+                            <line x1="50" y1="50" x2="50" y2="30" stroke="#ffc72c" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="50" y1="50" x2="65" y2="50" stroke="#ffe380" stroke-width="2" stroke-linecap="round"/>
+                            <!-- Center dot -->
+                            <circle cx="50" cy="50" r="4" fill="#ffc72c"/>
+                            <!-- 24/7 text -->
+                            <text x="50" y="90" text-anchor="middle" fill="#ffc72c" font-family="Inter" font-size="12" font-weight="600">24/7</text>
+                        </svg>
+                    </div>
+                                            <h3>24/7 Virtual Front Desk</h3>
+                    <p>Our friendly multilingual staff is available around the clock to assist with your needs</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="laundry-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffc72c;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ffe380;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Washing machine body -->
+                            <rect x="20" y="25" width="60" height="65" rx="5" fill="url(#laundry-gradient)" opacity="0.3"/>
+                            <!-- Door -->
+                            <circle cx="50" cy="55" r="20" fill="none" stroke="#ffc72c" stroke-width="2"/>
+                            <circle cx="50" cy="55" r="18" fill="#003c71" opacity="0.2"/>
+                            <!-- Window -->
+                            <circle cx="50" cy="55" r="16" fill="none" stroke="#ffe380" stroke-width="1"/>
+                            <!-- Clothes inside -->
+                            <path d="M40 55 Q50 45, 60 55 Q50 65, 40 55" fill="#ffc72c" opacity="0.4">
+                                <animateTransform attributeName="transform" type="rotate" from="0 50 55" to="360 50 55" dur="4s" repeatCount="indefinite"/>
+                            </path>
+                            <!-- Control panel -->
+                            <rect x="30" y="30" width="40" height="8" fill="#ffe380" opacity="0.6"/>
+                            <circle cx="35" cy="34" r="2" fill="#ffc72c"/>
+                            <circle cx="45" cy="34" r="2" fill="#ffc72c"/>
+                            <circle cx="55" cy="34" r="2" fill="#ffc72c"/>
+                            <circle cx="65" cy="34" r="2" fill="#ffc72c"/>
+                        </svg>
+                    </div>
+                    <h3>Coin-Op Laundry</h3>
+                    <p>Convenient on-site laundry facilities available for extended stays</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="parking-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffc72c;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ffe380;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Parking lot -->
+                            <rect x="10" y="40" width="80" height="50" fill="url(#parking-gradient)" opacity="0.2"/>
+                            <!-- Parking lines -->
+                            <rect x="20" y="45" width="3" height="40" fill="#ffc72c" opacity="0.6"/>
+                            <rect x="38" y="45" width="3" height="40" fill="#ffc72c" opacity="0.6"/>
+                            <rect x="56" y="45" width="3" height="40" fill="#ffc72c" opacity="0.6"/>
+                            <rect x="74" y="45" width="3" height="40" fill="#ffc72c" opacity="0.6"/>
+                            <!-- Car -->
+                            <rect x="25" y="55" width="11" height="20" rx="2" fill="#ffc72c" opacity="0.8"/>
+                            <rect x="26" y="60" width="9" height="6" fill="#003c71" opacity="0.3"/>
+                            <!-- Bus -->
+                            <rect x="43" y="50" width="11" height="30" rx="2" fill="#ffe380" opacity="0.8"/>
+                            <rect x="44" y="53" width="9" height="8" fill="#003c71" opacity="0.3"/>
+                            <!-- P sign -->
+                            <circle cx="50" cy="25" r="12" fill="none" stroke="#ffc72c" stroke-width="2"/>
+                            <text x="50" y="30" text-anchor="middle" fill="#ffc72c" font-family="Inter" font-size="14" font-weight="bold">P</text>
+                        </svg>
+                    </div>
+                    <h3>Free Parking</h3>
+                    <p>Ample free parking available for cars, buses, trucks, and RVs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location" id="location">
+        <div class="location-container">
+            <div class="location-header">
+                <h2 class="location-title">Prime Location</h2>
+                <p class="location-subtitle">Perfectly positioned for both business and leisure travelers</p>
+            </div>
+            <div class="location-content">
+                <div class="location-info">
+                    <ul class="location-list">
+                        <li class="location-item">
+                            <svg class="location-icon" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 2v10l4 2"/>
+                            </svg>
+                            <div class="location-details">
+                                <h4>NASA Johnson Space Center</h4>
+                                <p>Just 2.5 miles away - View interactive exhibits and see NASA aerospace professionals in live action</p>
+                            </div>
+                        </li>
+                        <li class="location-item">
+                            <svg class="location-icon" viewBox="0 0 24 24">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            </svg>
+                            <div class="location-details">
+                                <h4>Kemah Boardwalk</h4>
+                                <p>Minutes away - World-famous destination offering shopping, dining, rides and amusements</p>
+                            </div>
+                        </li>
+                        <li class="location-item">
+                            <svg class="location-icon" viewBox="0 0 24 24">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            </svg>
+                            <div class="location-details">
+                                <h4>Houston Physicians Hospital</h4>
+                                <p>Nearby hospital for emergency and specialty care</p>
+                            </div>
+                        </li>
+                        <li class="location-item">
+                            <svg class="location-icon" viewBox="0 0 24 24">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            </svg>
+                            <div class="location-details">
+                                <h4>HCA Clear Lake Hospital</h4>
+                                <p>Regional hospital providing comprehensive medical services</p>
+                            </div>
+                        </li>
+                        <li class="location-item">
+                            <svg class="location-icon" viewBox="0 0 24 24">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            </svg>
+                            <div class="location-details">
+                                <h4>Baybrook Mall</h4>
+                                <p>Nearby shopping destination for all your retail needs</p>
+                            </div>
+                        </li>
+                        <li class="location-item">
+                            <svg class="location-icon" viewBox="0 0 24 24">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            <div class="location-details">
+                                <h4>Airport Access</h4>
+                                <p>William P. Hobby Airport - 14 miles | George Bush International Airport - Short drive</p>
+                            </div>
+                        </li>
+                        <li class="location-item">
+                            <svg class="location-icon" viewBox="0 0 24 24">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            </svg>
+                            <div class="location-details">
+                                <h4>Galveston Cruise Terminal</h4>
+                                <p>Convenient access to cruise ship departures and arrivals</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="map-container">
+                    <div class="map-wrapper">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3471.4091444789656!2d-95.1279074!3d29.533577!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86409c947e364f3b%3A0xcf2799b78336976b!2sDays%20Inn%20%26%20Suites%20by%20Wyndham%20NASA%20Space%20Center%20Houston!5e0!3m2!1sen!2sus!4v1755397496873!5m2!1sen!2sus"
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="map-actions">
+                        <a href="https://maps.google.com/?q=201+North+Texas+Ave,+Webster,+TX+77598" target="_blank" class="map-btn">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            View on Google Maps
+                        </a>
+                        <a href="https://www.google.com/maps/dir//201+North+Texas+Ave,+Webster,+TX+77598" target="_blank" class="map-btn">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            Get Directions
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 class="contact-title">Contact Us</h2>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        <span>201 North Texas Ave, Webster, TX 77598</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        <span>Call us for reservations and inquiries</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                        <span>Email us for information and special requests</span>
+                    </div>
+                </div>
+                <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(0, 60, 113, 0.05) 0%, rgba(255, 199, 44, 0.05) 100%); border-left: 3px solid var(--brand-yellow); border-radius: 8px;">
+                    <h4 style="color: var(--brand-blue); margin-bottom: 0.5rem;">Cancellation Policy</h4>
+                    <p style="color: var(--brand-blue); font-size: 0.9rem;">24-hour cancellation policy. Cancel by 4 PM, 24 hours prior to arrival to avoid charges.</p>
+                </div>
+            </div>
+            <form class="contact-form" onsubmit="event.preventDefault()">
+                <div class="form-group">
+                    <input type="text" placeholder=" " required>
+                    <label>Full Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder=" " required>
+                    <label>Email Address</label>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder=" ">
+                    <label>Phone Number</label>
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder=" " required></textarea>
+                    <label>Your Message</label>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">DAYS INN & SUITES NASA</div>
+                <p class="footer-description">
+                    One of the area's best hotels in Webster, TX near Clear Lake and within the Houston metropolitan area. Offering location convenience, affordability, and comfort with true Southern Texas hospitality.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Hotel Features</h4>
+                <ul class="footer-links">
+                    <li><a href="guestrooms.html">63 Guest Rooms</a></li>
+                    <li><a href="gallery.html">Photo Gallery</a></li>
+                    <li><a href="amenities.html">Free Grab & Go Breakfast</a></li>
+                    <li><a href="amenities.html">Indoor Heated Pool</a></li>
+                    <li><a href="amenities.html">Business Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Nearby Attractions</h4>
+                <ul class="footer-links">
+                    <li><a href="#location">NASA Johnson Space Center</a></li>
+                    <li><a href="#location">Kemah Boardwalk</a></li>
+                    <li><a href="#location">Schlitterbahn Galveston</a></li>
+                    <li><a href="#location">Galveston Cruise Terminal</a></li>
+                    <li><a href="#location">Baybrook Mall</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Guest Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#contact">24/7 Virtual Front Desk</a></li>
+                    <li><a href="amenities.html">Multilingual Staff</a></li>
+                    <li><a href="hotel-policies-page.html">Hotel Policies</a></li>
+                    <li><a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank">Make a Reservation</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Days Inn & Suites NASA. 201 North Texas Ave, Webster, Texas 77598 | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hide Loader - Show only once per session
+        window.addEventListener('load', () => {
+            const hasSeenLoader = sessionStorage.getItem('daysinn-loader-shown');
+            
+            if (hasSeenLoader) {
+                document.getElementById('loader').classList.add('hidden');
+            } else {
+                setTimeout(() => {
+                    document.getElementById('loader').classList.add('hidden');
+                    sessionStorage.setItem('daysinn-loader-shown', 'true');
+                }, 1500);
+            }
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.about-content').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            
+            if (navLinks.classList.contains('active')) {
+                setTimeout(() => navLinks.classList.add('visible'), 10);
+                document.body.style.overflow = 'hidden';
+            } else {
+                navLinks.classList.remove('visible');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active', 'visible');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active', 'visible');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Hero Slideshow
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        let slideshowInterval;
+
+        function nextSlide() {
+            if (totalSlides === 0) return;
+            
+            slides[currentSlide].classList.remove('active');
+            slides[currentSlide].style.opacity = '0';
+            
+            currentSlide = (currentSlide + 1) % totalSlides;
+            
+            slides[currentSlide].classList.add('active');
+            slides[currentSlide].style.opacity = '1';
+        }
+
+        function initSlideshow() {
+            if (totalSlides > 0) {
+                slides[0].classList.add('active');
+                slides[0].style.opacity = '1';
+                
+                if (totalSlides > 1) {
+                    slideshowInterval = setInterval(nextSlide, 5000);
+                }
+            }
+        }
+
+        // Initialize slideshow when page loads
+        document.addEventListener('DOMContentLoaded', initSlideshow);
+
+        // Pause slideshow on hover
+        const heroSection = document.querySelector('.hero');
+        if (heroSection) {
+            heroSection.addEventListener('mouseenter', () => {
+                if (slideshowInterval) {
+                    clearInterval(slideshowInterval);
+                }
+            });
+            
+            heroSection.addEventListener('mouseleave', () => {
+                if (totalSlides > 1) {
+                    slideshowInterval = setInterval(nextSlide, 5000);
+                }
+            });
+        }
+
+        // Make home room cards clickable
+        document.querySelectorAll('.rooms .room-card[data-href]').forEach(card => {
+            const href = card.getAttribute('data-href');
+            card.addEventListener('click', () => {
+                if (href) window.location.href = href;
+            });
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    if (href) window.location.href = href;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

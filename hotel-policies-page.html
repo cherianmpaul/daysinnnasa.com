@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Policies | Days Inn & Suites NASA Webster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@200;300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Days Inn Brand Colors */
+            --brand-blue: #003c71;
+            --brand-blue-dark: #002449;
+            --brand-blue-light: #0054a6;
+            --brand-yellow: #ffc72c;
+            --brand-yellow-bright: #ffdd00;
+            --brand-yellow-soft: #ffe380;
+            --brand-white: #ffffff;
+            
+            /* Luxury Variations */
+            --midnight-blue: #001f3f;
+            --royal-blue: #004080;
+            --sky-blue: #4a90e2;
+            --champagne: #fff5d6;
+            --pearl: #fafafa;
+            --silver: #e8e8e8;
+            
+            /* Functional Colors */
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-blue: rgba(0, 60, 113, 0.05);
+            --text-light: rgba(255, 255, 255, 0.95);
+            --text-muted: rgba(255, 255, 255, 0.75);
+            --text-dark: #002449;
+            --shadow: rgba(0, 36, 73, 0.15);
+            
+            /* Policy Card Colors */
+            --success-green: #10b981;
+            --warning-amber: #f59e0b;
+            --info-blue: #3b82f6;
+            --error-red: #ef4444;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--brand-blue) 100%);
+            color: var(--brand-white);
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+            min-width: 320px;
+        }
+
+        /* Premium Noise Texture */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.02;
+            z-index: 1;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 199, 44, 0.01) 35px, rgba(255, 199, 44, 0.01) 70px),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="noise"><feTurbulence baseFrequency="0.9"/></filter><rect width="200" height="200" filter="url(%23noise)" opacity="0.4"/></svg>');
+        }
+
+        /* Premium Navigation - Matching index.html */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(180deg, rgba(0, 31, 63, 0.95) 0%, rgba(0, 60, 113, 0.9) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 199, 44, 0.15);
+        }
+
+        nav.scrolled {
+            background: linear-gradient(180deg, rgba(0, 36, 73, 0.98) 0%, rgba(0, 60, 113, 0.95) 100%);
+            backdrop-filter: blur(30px) saturate(200%);
+            padding: 1rem 3rem;
+            border-bottom: 1px solid rgba(255, 199, 44, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 36, 73, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--brand-white) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.2));
+        }
+
+        .logo:hover {
+            filter: drop-shadow(0 4px 20px rgba(255, 199, 44, 0.4));
+            transform: translateY(-1px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--brand-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            position: relative;
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 4px rgba(0, 36, 73, 0.3);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            transition: width 0.3s ease;
+            box-shadow: 0 2px 10px rgba(255, 199, 44, 0.5);
+        }
+
+        .nav-link:hover {
+            color: var(--brand-yellow-soft);
+            transform: translateY(-1px);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--brand-yellow-soft);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .book-now {
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 50%, var(--brand-yellow) 100%);
+            color: var(--brand-blue-dark);
+            border: 2px solid transparent;
+            padding: 0.9rem 2.2rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 3px;
+            box-shadow: 
+                0 2px 10px rgba(255, 199, 44, 0.3),
+                0 10px 40px rgba(255, 199, 44, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 10px rgba(0, 36, 73, 0.1);
+            text-shadow: 0 1px 2px rgba(0, 36, 73, 0.2);
+            transform-style: preserve-3d;
+        }
+
+        .book-now::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            transform: translateX(-100%) skewX(-45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .book-now:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 4px 20px rgba(255, 199, 44, 0.5),
+                0 15px 50px rgba(255, 199, 44, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -3px 15px rgba(0, 36, 73, 0.15);
+            background: linear-gradient(135deg, var(--brand-yellow-bright) 0%, var(--brand-yellow) 50%, var(--brand-yellow-bright) 100%);
+            border-color: rgba(255, 199, 44, 0.3);
+        }
+
+        .book-now:hover::before {
+            transform: translateX(100%) skewX(-45deg);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-white) 100%);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .nav-links.active {
+            display: flex !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0, 31, 63, 0.98) 0%, rgba(0, 60, 113, 0.98) 100%);
+            backdrop-filter: blur(30px);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1000;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .nav-links.active.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Policies Hero Section */
+        .policies-hero {
+            height: 70vh;
+            min-height: 600px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--midnight-blue) 0%, var(--brand-blue) 50%, var(--royal-blue) 100%);
+            margin-top: 0;
+            padding: 3rem 2rem;
+        }
+
+        .policies-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 199, 44, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            z-index: 1;
+            animation: pulse-bg 8s ease infinite;
+        }
+
+        @keyframes pulse-bg {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: 0;
+            background-image: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 35px,
+                rgba(255, 199, 44, 0.05) 35px,
+                rgba(255, 199, 44, 0.05) 70px
+            );
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 1000px;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .hero-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 10px 30px rgba(255, 199, 44, 0.3),
+                0 0 60px rgba(255, 199, 44, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: var(--brand-blue-dark);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .hero-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.1s forwards;
+            font-weight: 500;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.3));
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.2s forwards;
+            font-weight: 700;
+            text-shadow: 0 4px 20px rgba(0, 36, 73, 0.3);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-light);
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeInUp 1s 0.3s forwards;
+            text-shadow: 0 2px 10px rgba(0, 36, 73, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Quick Info Bar */
+        .quick-info {
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255, 199, 44, 0.2);
+            border-bottom: 1px solid rgba(255, 199, 44, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quick-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 199, 44, 0.1), transparent);
+            animation: sweep 8s linear infinite;
+        }
+
+        @keyframes sweep {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .quick-info-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+
+        .info-item {
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .info-item:nth-child(1) { animation-delay: 0.1s; }
+        .info-item:nth-child(2) { animation-delay: 0.2s; }
+        .info-item:nth-child(3) { animation-delay: 0.3s; }
+        .info-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: rgba(255, 199, 44, 0.1);
+            border: 2px solid var(--brand-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover .info-icon {
+            background: var(--brand-yellow);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 30px rgba(255, 199, 44, 0.4);
+        }
+
+        .info-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--brand-yellow);
+            fill: none;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover .info-icon svg {
+            stroke: var(--brand-blue-dark);
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.3));
+        }
+
+        /* Policies Section */
+        .policies-section {
+            padding: 5rem 3rem 8rem;
+            background: linear-gradient(180deg, var(--pearl) 0%, var(--brand-white) 100%);
+            position: relative;
+        }
+
+        .policies-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Must Know Information Section */
+        .must-know-section {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(245, 158, 11, 0.05) 100%);
+            border: 2px solid rgba(239, 68, 68, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .must-know-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--error-red) 0%, var(--warning-amber) 100%);
+        }
+
+        .must-know-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .must-know-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--error-red) 0%, var(--warning-amber) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3);
+            animation: pulse 2s ease infinite;
+        }
+
+        .must-know-icon svg {
+            width: 35px;
+            height: 35px;
+            stroke: var(--brand-white);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .must-know-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--brand-blue-dark);
+            font-weight: 600;
+        }
+
+        .must-know-list {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .must-know-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--brand-white);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 36, 73, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .must-know-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0, 36, 73, 0.1);
+        }
+
+        .must-know-item svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--warning-amber);
+            fill: none;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .must-know-text {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Policy Cards Grid */
+        .policies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .policy-card {
+            background: var(--brand-white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 
+                0 20px 40px rgba(0, 36, 73, 0.1),
+                0 0 0 1px rgba(0, 60, 113, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .policy-card:nth-child(1) { animation-delay: 0.1s; }
+        .policy-card:nth-child(2) { animation-delay: 0.2s; }
+        .policy-card:nth-child(3) { animation-delay: 0.3s; }
+        .policy-card:nth-child(4) { animation-delay: 0.4s; }
+        .policy-card:nth-child(5) { animation-delay: 0.5s; }
+        .policy-card:nth-child(6) { animation-delay: 0.6s; }
+        .policy-card:nth-child(7) { animation-delay: 0.7s; }
+        .policy-card:nth-child(8) { animation-delay: 0.8s; }
+
+        .policy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            transform-origin: top;
+        }
+
+        .policy-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 30px 60px rgba(0, 36, 73, 0.15),
+                0 0 0 2px var(--brand-yellow);
+        }
+
+        .policy-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .policy-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .policy-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(255, 199, 44, 0.1) 0%, rgba(255, 199, 44, 0.2) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .policy-card:hover .policy-icon {
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            transform: rotate(5deg) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 199, 44, 0.3);
+        }
+
+        .policy-icon svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--brand-blue-dark);
+            fill: none;
+            stroke-width: 2;
+            transition: all 0.3s ease;
+        }
+
+        .policy-card:hover .policy-icon svg {
+            stroke: var(--brand-blue-dark);
+            transform: scale(1.1);
+        }
+
+        .policy-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--brand-blue-dark);
+            font-weight: 600;
+        }
+
+        .policy-content {
+            color: var(--text-dark);
+            opacity: 0.8;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .policy-highlight {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            color: var(--brand-blue-dark);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+            margin: 0 0.2rem;
+        }
+
+        /* Special Notice Card */
+        .special-notice {
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 25px 50px rgba(0, 36, 73, 0.3),
+                inset 0 1px 0 rgba(255, 199, 44, 0.2);
+        }
+
+        .special-notice::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 199, 44, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .notice-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .notice-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(255, 199, 44, 0.4);
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .notice-icon svg {
+            width: 35px;
+            height: 35px;
+            stroke: var(--brand-blue-dark);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .notice-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--brand-white);
+            font-weight: 600;
+        }
+
+        .notice-content {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .notice-list {
+            list-style: none;
+            margin-top: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .notice-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 199, 44, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .notice-list li:hover {
+            background: rgba(255, 199, 44, 0.1);
+            transform: translateX(5px);
+            border-color: var(--brand-yellow);
+        }
+
+        .notice-list svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--brand-yellow);
+            fill: none;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* COVID-19 Notice Section */
+        .covid-notice {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .covid-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .covid-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--info-blue) 0%, var(--success-green) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .covid-icon svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--brand-white);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .covid-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--brand-blue-dark);
+            font-weight: 600;
+        }
+
+        .covid-content {
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .covid-list {
+            list-style: none;
+            margin-top: 1.5rem;
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .covid-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.8rem;
+            background: var(--brand-white);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .covid-list li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
+        }
+
+        .covid-list svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--info-blue);
+            fill: none;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Important Links Bar */
+        .links-bar {
+            background: linear-gradient(135deg, rgba(0, 60, 113, 0.05) 0%, rgba(0, 36, 73, 0.05) 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 4rem;
+            border: 1px solid rgba(0, 60, 113, 0.1);
+        }
+
+        .links-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .links-text {
+            flex: 1;
+        }
+
+        .links-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--brand-blue-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .links-subtitle {
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+
+        .links-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .link-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+            color: var(--brand-white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 5px 15px rgba(0, 36, 73, 0.2);
+        }
+
+        .link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 36, 73, 0.3);
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            color: var(--brand-blue-dark);
+        }
+
+        .link-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        /* Footer - Matching index.html */
+        footer {
+            padding: 5rem 3rem 2rem;
+            background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--brand-blue-dark) 100%);
+            border-top: 1px solid rgba(255, 199, 44, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.3));
+        }
+
+        .footer-description {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-yellow);
+            padding-left: 0.5rem;
+            text-shadow: 0 2px 10px rgba(255, 199, 44, 0.3);
+        }
+
+        .footer-bottom {
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 199, 44, 0.1);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 1400px) {
+            .policies-hero {
+                height: 75vh;
+                min-height: 700px;
+                padding: 4rem 3rem;
+            }
+
+            .hero-content {
+                max-width: 1200px;
+            }
+
+            .hero-title {
+                font-size: 5rem;
+            }
+
+            .hero-description {
+                font-size: 1.3rem;
+                max-width: 700px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .policies-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            nav.scrolled {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-container {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .policies-hero {
+                height: 60vh;
+                min-height: 450px;
+                padding: 2rem 1rem;
+            }
+
+            .hero-content {
+                padding: 1rem;
+                max-width: 100%;
+            }
+
+            .hero-subtitle {
+                font-size: 0.85rem;
+                margin-bottom: 1.5rem;
+                letter-spacing: 0.2em;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+                line-height: 1.2;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+                line-height: 1.7;
+                max-width: 100%;
+                padding: 0 0.5rem;
+            }
+
+            .quick-info-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+                padding: 0 1.5rem;
+            }
+
+            .policies-section {
+                padding: 3rem 1rem 5rem;
+            }
+
+            .must-know-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .policies-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .policy-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .special-notice {
+                padding: 2rem 1.5rem;
+            }
+
+            .notice-list {
+                grid-template-columns: 1fr;
+            }
+
+            .covid-notice {
+                padding: 2rem 1.5rem;
+            }
+
+            .links-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .links-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quick-info-container {
+                grid-template-columns: 1fr;
+            }
+
+            .policies-hero {
+                height: 70vh;
+                min-height: 500px;
+                padding: 1.5rem 0.8rem;
+            }
+
+            .hero-content {
+                padding: 0.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.8rem;
+                margin-bottom: 1.2rem;
+                letter-spacing: 0.15em;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+                line-height: 1.1;
+                margin-bottom: 1.2rem;
+            }
+
+            .hero-description {
+                font-size: 0.95rem;
+                line-height: 1.6;
+                padding: 0 0.3rem;
+            }
+
+            .must-know-section {
+                padding: 1.5rem 1rem;
+            }
+
+            .policy-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .policy-icon {
+                margin: 0 auto;
+            }
+
+            .covid-notice {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Noise Texture -->
+    <div class="noise"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">DAYS INN NASA</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="guestrooms.html" class="nav-link">Guest Rooms</a></li>
+                <li><a href="amenities.html" class="nav-link">Amenities</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="hotel-policies-page.html" class="nav-link active">Hotel Policies</a></li>
+                <li><a href="hotel-reviews-page.html" class="nav-link">Reviews</a></li>
+                <li><a href="specials-page.html" class="nav-link">Specials</a></li>
+                <li><button class="book-now" onclick="window.open('https://www.wyndhamhotels.com/hotel/15443', '_blank')">Book Now</button></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Policies Hero Section -->
+    <section class="policies-hero">
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+            <div class="hero-subtitle">Guidelines & Information</div>
+            <h1 class="hero-title">Hotel Policies</h1>
+            <p class="hero-description">
+                Your comfort and satisfaction are our priorities. Please review our policies to ensure a pleasant stay at Days Inn & Suites NASA Webster.
+            </p>
+        </div>
+    </section>
+
+    <!-- Quick Info Bar -->
+    <section class="quick-info">
+        <div class="quick-info-container">
+            <div class="info-item">
+                <div class="info-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                </div>
+                <div class="info-label">Check-In Time</div>
+                <div class="info-value">3:00 PM - 11:00 PM</div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 8 14"></polyline>
+                    </svg>
+                </div>
+                <div class="info-label">Check-Out Time</div>
+                <div class="info-value">11:00 AM</div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <div class="info-label">Children Policy</div>
+                <div class="info-value">All Ages Welcome</div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="11" width="18" height="10" rx="2" ry="2"></rect>
+                        <path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11"></path>
+                    </svg>
+                </div>
+                <div class="info-label">Age Restriction</div>
+                <div class="info-value">Min. 25 Years</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Policies Section -->
+    <section class="policies-section">
+        <div class="policies-container">
+            <!-- Must Know Information Section -->
+            <div class="must-know-section">
+                <div class="must-know-header">
+                    <div class="must-know-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="16"></line>
+                            <line x1="12" y1="8" x2="12" y2="8"></line>
+                        </svg>
+                    </div>
+                    <h2 class="must-know-title">Must-Know Information</h2>
+                </div>
+                <ul class="must-know-list">
+                    <li class="must-know-item">
+                        <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline></svg>
+                        <span class="must-know-text">All guests under 25 years checking in without an adult will be charged a <strong>refundable cash deposit of $100</strong></span>
+                    </li>
+                    <li class="must-know-item">
+                        <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline></svg>
+                        <span class="must-know-text">Guests residing within 50 miles of the property will be charged a <strong>refundable cash deposit of $100 USD</strong></span>
+                    </li>
+                    <li class="must-know-item">
+                        <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline></svg>
+                        <span class="must-know-text">All guests must check in by <strong>midnight</strong> - Please inform us of late arrival in advance</span>
+                    </li>
+
+                    <li class="must-know-item">
+                        <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline></svg>
+                        <span class="must-know-text">Photo ID and credit card are <strong>required at check-in</strong> for all guests</span>
+                    </li>
+                    <li class="must-know-item">
+                        <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline></svg>
+                        <span class="must-know-text">Please inform us of your expected arrival time in advance using the Special Requests box when booking</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Policy Cards Grid -->
+            <div class="policies-grid">
+                <!-- Check-In Policy -->
+                <div class="policy-card">
+                    <div class="policy-header">
+                        <div class="policy-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="policy-title">Check-In Policy</h3>
+                    </div>
+                    <div class="policy-content">
+                        Check-in time is from <span class="policy-highlight">3:00 PM to 11:00 PM</span>. Guests must show photo ID and credit card at check-in. Please notify the property of your arrival time in advance. Late arrivals after 11:00 PM must be arranged prior to arrival.
+                    </div>
+                </div>
+
+                <!-- Check-Out Policy -->
+                <div class="policy-card">
+                    <div class="policy-header">
+                        <div class="policy-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                        </div>
+                        <h3 class="policy-title">Check-Out Policy</h3>
+                    </div>
+                    <div class="policy-content">
+                        Check-out time is <span class="policy-highlight">11:00 AM</span>. Late check-out may be arranged with the front desk based on availability. Additional charges may apply for late departures without prior arrangement.
+                    </div>
+                </div>
+
+                <!-- Children Policy -->
+                <div class="policy-card">
+                    <div class="policy-header">
+                        <div class="policy-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13"></path>
+                                <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88"></path>
+                            </svg>
+                        </div>
+                        <h3 class="policy-title">Children & Beds</h3>
+                    </div>
+                    <div class="policy-content">
+                        Children of <span class="policy-highlight">all ages are welcome</span>. Children 18 and above will be charged as adults at this property. Cribs and extra beds are not available. Please add the number and ages of children when booking for correct pricing.
+                    </div>
+                </div>
+
+                <!-- Pet Policy -->
+                <div class="policy-card">
+                    <div class="policy-header">
+                        <div class="policy-icon">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="4.5" cy="9.5" r="2.5"></circle>
+                                <circle cx="9" cy="5.5" r="2.5"></circle>
+                                <circle cx="15" cy="5.5" r="2.5"></circle>
+                                <circle cx="19.5" cy="9.5" r="2.5"></circle>
+                                <path d="M17.34 14C17.34 14 16 19 12 19C8 19 6.66 14 6.66 14C5.6 14 4.74 14.84 4.74 15.9C4.74 18.14 7.36 21 12 21C16.64 21 19.26 18.14 19.26 15.9C19.26 14.84 18.4 14 17.34 14Z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="policy-title">Pet Policy</h3>
+                    </div>
+                    <div class="policy-content">
+                        <span class="policy-highlight">Pets are not allowed</span> at this property. We regret any inconvenience this may cause. Service animals as defined by the ADA are always welcome.
+                    </div>
+                </div>
+
+                <!-- Smoking Policy -->
+                <div class="policy-card">
+                    <div class="policy-header">
+                        <div class="policy-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M19 13H22V17H19V13Z"></path>
+                                <path d="M2 13H17V17H2V13Z"></path>
+                                <path d="M18 8C18 6.34315 16.6569 5 15 5V5"></path>
+                                <path d="M18 9C18 7.34315 16.6569 6 15 6V6C13.3431 6 12 4.65685 12 3V3"></path>
+                            </svg>
+                        </div>
+                        <h3 class="policy-title">Smoking Policy</h3>
+                    </div>
+                    <div class="policy-content">
+                        Smoking is permitted in <span class="policy-highlight">designated areas</span>. Please select your room preference when booking. A cleaning fee will apply for smoking in non-smoking rooms.
+                    </div>
+                </div>
+
+                <!-- Cancellation Policy -->
+                <div class="policy-card">
+                    <div class="policy-header">
+                        <div class="policy-icon">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                                <line x1="9" y1="16" x2="15" y2="16"></line>
+                            </svg>
+                        </div>
+                        <h3 class="policy-title">Cancellation/Prepayment</h3>
+                    </div>
+                    <div class="policy-content">
+                        Cancellation and prepayment policies <span class="policy-highlight">vary by accommodation type</span>. Please check the conditions of your selected option when booking. Enter your stay dates to see specific terms.
+                    </div>
+                </div>
+
+                <!-- Age Restriction -->
+                <div class="policy-card">
+                    <div class="policy-header">
+                        <div class="policy-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"></path>
+                                <circle cx="8.5" cy="7" r="4"></circle>
+                                <line x1="20" y1="8" x2="20" y2="14"></line>
+                                <line x1="23" y1="11" x2="17" y2="11"></line>
+                            </svg>
+                        </div>
+                        <h3 class="policy-title">Age Restriction</h3>
+                    </div>
+                    <div class="policy-content">
+                        The minimum age for check-in is <span class="policy-highlight">25 years</span>. Valid government-issued photo identification is required for all guests at check-in.
+                    </div>
+                </div>
+
+                <!-- Group Bookings -->
+                <div class="policy-card">
+                    <div class="policy-header">
+                        <div class="policy-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13"></path>
+                                <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88"></path>
+                            </svg>
+                        </div>
+                        <h3 class="policy-title">Group Bookings</h3>
+                    </div>
+                    <div class="policy-content">
+                        When booking <span class="policy-highlight">more than 9 rooms</span>, different policies and additional fees may apply. Please contact the property directly for group reservations and special arrangements.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Special Notice -->
+            <div class="special-notice">
+                <div class="notice-header">
+                    <div class="notice-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                    </div>
+                    <h2 class="notice-title">General Information</h2>
+                </div>
+                <div class="notice-content">
+                    <p>Please note the following important information about our property:</p>
+                    <ul class="notice-list">
+                        <li>
+                            <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline></svg>
+                            <span>Our property has no elevator - upstairs rooms are accessible via stairs</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline></svg>
+                            <span>Security deposits required: Cash deposit of $100 USD for guests under 25 or living within 50 miles</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline></svg>
+                            <span>24/7 Virtual Front Desk available for assistance</span>
+                        </li>
+
+                        <li>
+                            <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline></svg>
+                            <span>Special requests are subject to availability and may incur additional charges</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"></polyline></svg>
+                            <span>We take special requests - add them in the next booking step!</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <!-- Important Links -->
+            <div class="links-bar">
+                <div class="links-container">
+                    <div class="links-text">
+                        <h3 class="links-title">Need More Information?</h3>
+                        <p class="links-subtitle">Contact us directly or make your reservation online</p>
+                    </div>
+                    <div class="links-buttons">
+                        <a href="tel:+12813385888" class="link-btn">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M22 16.92V19.92C22.0011 20.1985 21.9441 20.4742 21.8325 20.7294C21.7209 20.9845 21.5573 21.2136 21.3521 21.4019C21.1468 21.5901 20.9046 21.7335 20.6407 21.8227C20.3769 21.9119 20.0974 21.9451 19.82 21.92C16.7428 21.5856 13.787 20.5342 11.19 18.85C8.77382 17.3147 6.72533 15.2662 5.18999 12.85C3.49997 10.2412 2.44824 7.27099 2.11999 4.18C2.09501 3.90347 2.12787 3.62476 2.21649 3.36162C2.30512 3.09849 2.44756 2.85669 2.63476 2.65162C2.82196 2.44655 3.0498 2.28271 3.30379 2.17052C3.55777 2.05833 3.83233 2.00026 4.10999 2H7.10999C7.5953 1.99522 8.06579 2.16708 8.43376 2.48353C8.80173 2.79999 9.04207 3.23945 9.10999 3.72C9.23662 4.68007 9.47144 5.62273 9.80999 6.53C9.94454 6.88792 9.97366 7.27691 9.89391 7.65088C9.81415 8.02485 9.62886 8.36811 9.35999 8.64L8.08999 9.91C9.51355 12.4136 11.5864 14.4864 14.09 15.91L15.36 14.64C15.6319 14.3711 15.9751 14.1859 16.3491 14.1061C16.7231 14.0263 17.1121 14.0555 17.47 14.19C18.3773 14.5286 19.3199 14.7634 20.28 14.89C20.7658 14.9585 21.2094 15.2032 21.5265 15.5775C21.8437 15.9518 22.0122 16.4296 22 16.92Z"></path>
+                            </svg>
+                            Call Us
+                        </a>
+                        <a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank" class="link-btn">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            Book Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">DAYS INN & SUITES NASA</div>
+                <p class="footer-description">
+                    One of the area's best hotels in Webster, TX near Clear Lake and within the Houston metropolitan area. Offering location convenience, affordability, and comfort with true Southern Texas hospitality.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Hotel Features</h4>
+                <ul class="footer-links">
+                    <li><a href="guestrooms.html">63 Guest Rooms</a></li>
+                    <li><a href="gallery.html">Photo Gallery</a></li>
+                    <li><a href="amenities.html">Free Grab & Go Breakfast</a></li>
+                    <li><a href="amenities.html">Indoor Heated Pool</a></li>
+                    <li><a href="amenities.html">Business Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Nearby Attractions</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#location">NASA Johnson Space Center</a></li>
+                    <li><a href="index.html#location">Kemah Boardwalk</a></li>
+                    <li><a href="index.html#location">Schlitterbahn Galveston</a></li>
+                    <li><a href="index.html#location">Gulf Greyhound Park</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Guest Services</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#contact">24/7 Virtual Front Desk</a></li>
+                    <li><a href="amenities.html">Express Check-In/Out</a></li>
+                    <li><a href="amenities.html">Multilingual Staff</a></li>
+                    <li><a href="hotel-policies-page.html">Hotel Policies</a></li>
+                    <li><a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank">Make a Reservation</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Days Inn & Suites NASA. 201 North Texas Ave, Webster, Texas 77598 | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+                
+                if (navLinks.classList.contains('active')) {
+                    setTimeout(() => navLinks.classList.add('visible'), 10);
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    navLinks.classList.remove('visible');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active', 'visible');
+                    menuToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe policy cards for animation
+        document.querySelectorAll('.policy-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            observer.observe(card);
+        });
+
+        // Smooth scroll to section if coming from another page
+        if (window.location.hash) {
+            setTimeout(() => {
+                const element = document.querySelector(window.location.hash);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
+        }
+
+        // Add hover effect to policy cards
+        document.querySelectorAll('.policy-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.policies-hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>

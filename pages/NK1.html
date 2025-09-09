@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 King Bed, Second Floor, Non-Smoking | Days Inn & Suites NASA Webster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@200;300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Days Inn Brand Colors */
+            --brand-blue: #003c71;
+            --brand-blue-dark: #002449;
+            --brand-blue-light: #0054a6;
+            --brand-yellow: #ffc72c;
+            --brand-yellow-bright: #ffdd00;
+            --brand-yellow-soft: #ffe380;
+            --brand-white: #ffffff;
+            
+            /* Luxury Variations */
+            --midnight-blue: #001f3f;
+            --royal-blue: #004080;
+            --sky-blue: #4a90e2;
+            --champagne: #fff5d6;
+            --pearl: #fafafa;
+            --silver: #e8e8e8;
+            --smoke-gray: #6b7280;
+            --smoke-light: #9ca3af;
+            --fresh-green: #10b981;
+            --mint-green: #d1fae5;
+            --ocean-teal: #0891b2;
+            --teal-light: #67e8f9;
+            
+            /* Functional Colors */
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-blue: rgba(0, 60, 113, 0.05);
+            --text-light: rgba(255, 255, 255, 0.95);
+            --text-muted: rgba(255, 255, 255, 0.75);
+            --text-dark: #002449;
+            --shadow: rgba(0, 36, 73, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--pearl);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        /* Premium Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(180deg, rgba(0, 31, 63, 0.95) 0%, rgba(0, 60, 113, 0.9) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 199, 44, 0.15);
+        }
+
+        nav.scrolled {
+            background: linear-gradient(180deg, rgba(0, 36, 73, 0.98) 0%, rgba(0, 60, 113, 0.95) 100%);
+            backdrop-filter: blur(30px) saturate(200%);
+            padding: 1rem 3rem;
+            border-bottom: 1px solid rgba(255, 199, 44, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 36, 73, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--brand-white) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.2));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--brand-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            position: relative;
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 4px rgba(0, 36, 73, 0.3);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            transition: width 0.3s ease;
+            box-shadow: 0 2px 10px rgba(255, 199, 44, 0.5);
+        }
+
+        .nav-link:hover {
+            color: var(--brand-yellow-soft);
+            transform: translateY(-1px);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .book-now {
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 50%, var(--brand-yellow) 100%);
+            color: var(--brand-blue-dark);
+            padding: 0.9rem 2.2rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 3px;
+            border: none;
+            box-shadow: 0 2px 10px rgba(255, 199, 44, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .book-now:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 4px 20px rgba(255, 199, 44, 0.5);
+        }
+
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            position: fixed;
+            top: 85px;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+            padding: 1rem 3rem;
+            z-index: 999;
+            border-bottom: 1px solid rgba(255, 199, 44, 0.2);
+            backdrop-filter: blur(20px);
+        }
+
+        .breadcrumb-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--brand-yellow);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 199, 44, 0.3);
+            border-radius: 3px;
+            background: rgba(255, 199, 44, 0.05);
+        }
+
+        .back-button:hover {
+            background: rgba(255, 199, 44, 0.15);
+            transform: translateX(-5px);
+            box-shadow: 0 4px 15px rgba(255, 199, 44, 0.2);
+        }
+
+        /* Room Hero Section */
+        .room-hero {
+            margin-top: 145px;
+            position: relative;
+            background: linear-gradient(180deg, var(--pearl) 0%, var(--brand-white) 100%);
+            overflow: hidden;
+        }
+
+        .room-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 80% 20%, rgba(103, 232, 249, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 40%);
+            z-index: 0;
+        }
+
+        .room-hero-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 4rem 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .room-image-showcase {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 36, 73, 0.2);
+            height: 600px;
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+        }
+
+        .room-main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(1.05) contrast(1.1);
+        }
+
+        .image-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            color: var(--brand-blue-dark);
+            padding: 0.8rem 2rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            box-shadow: 0 6px 20px rgba(255, 199, 44, 0.4);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .non-smoking-icon {
+            width: 16px;
+            height: 16px;
+            fill: var(--brand-white);
+        }
+
+        .perfect-for-badge {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: linear-gradient(135deg, rgba(0, 60, 113, 0.9) 0%, rgba(0, 36, 73, 0.9) 100%);
+            color: var(--brand-yellow);
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 199, 44, 0.3);
+            border-radius: 3px;
+        }
+
+        .floor-indicator {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+            color: var(--brand-blue-dark);
+            padding: 0.8rem 1.8rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 60, 113, 0.2);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .room-info {
+            padding: 2rem;
+        }
+
+        .room-category-label {
+            font-size: 0.9rem;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 2px 5px rgba(255, 199, 44, 0.2));
+        }
+
+        .room-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            margin-bottom: 2rem;
+            font-weight: 700;
+            color: var(--brand-blue-dark);
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 36, 73, 0.1);
+        }
+
+        .room-highlight {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(255, 199, 44, 0.1) 0%, rgba(255, 199, 44, 0.05) 100%);
+            border-left: 3px solid var(--brand-yellow);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 1rem;
+            color: var(--brand-blue-dark);
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .room-description {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--brand-blue);
+            margin-bottom: 2rem;
+        }
+
+        .room-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            color: var(--brand-blue-dark);
+            font-weight: 500;
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--brand-yellow);
+            filter: drop-shadow(0 2px 5px rgba(255, 199, 44, 0.3));
+        }
+
+        .room-cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            color: var(--brand-blue-dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 5px 20px rgba(255, 199, 44, 0.3);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 199, 44, 0.5);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--brand-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 2px solid var(--brand-blue);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: var(--brand-blue);
+            color: var(--brand-white);
+            box-shadow: 0 5px 20px rgba(0, 36, 73, 0.3);
+        }
+
+        /* Non-Smoking Notice */
+        .non-smoking-notice {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(209, 250, 229, 0.3) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .notice-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--fresh-green);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .notice-text {
+            color: var(--brand-blue-dark);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Stairs Only Notice */
+        .stairs-notice {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(103, 232, 249, 0.1) 100%);
+            border: 1px solid rgba(8, 145, 178, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .stairs-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--ocean-teal);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Special Features Section */
+        .special-features {
+            background: linear-gradient(135deg, var(--champagne) 0%, rgba(255, 245, 214, 0.3) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(255, 199, 44, 0.1);
+        }
+
+        .special-features-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--brand-blue-dark);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .special-features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .special-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--brand-blue);
+            font-size: 0.95rem;
+        }
+
+        .special-feature-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--brand-yellow);
+        }
+
+        /* Amenities Section */
+        .amenities-section {
+            padding: 5rem 3rem;
+            background: linear-gradient(135deg, var(--pearl) 0%, var(--brand-white) 100%);
+        }
+
+        .amenities-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--brand-blue-dark);
+            font-weight: 600;
+        }
+
+        .included-services {
+            background: linear-gradient(135deg, var(--champagne) 0%, rgba(255, 199, 44, 0.05) 100%);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(255, 199, 44, 0.15);
+        }
+
+        .included-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--brand-blue-dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .included-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .included-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--brand-blue);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .included-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--brand-yellow);
+            filter: drop-shadow(0 2px 5px rgba(255, 199, 44, 0.3));
+        }
+
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .amenity-group {
+            background: var(--brand-white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 36, 73, 0.1);
+            border: 1px solid rgba(0, 60, 113, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .amenity-group::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--brand-yellow), var(--brand-yellow-bright), var(--brand-yellow));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .amenity-group:hover::before {
+            transform: scaleX(1);
+        }
+
+        .amenity-group:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 36, 73, 0.15);
+        }
+
+        .amenity-group-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--brand-blue-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--brand-yellow);
+            background: linear-gradient(90deg, var(--brand-blue) 0%, var(--royal-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .amenity-list {
+            list-style: none;
+        }
+
+        .amenity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            color: var(--brand-blue);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .amenity-item:hover {
+            padding-left: 0.5rem;
+            color: var(--brand-blue-dark);
+        }
+
+        .amenity-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--brand-yellow);
+            flex-shrink: 0;
+        }
+
+        /* Other Rooms Section */
+        .other-rooms-section {
+            padding: 5rem 3rem;
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .other-rooms-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 199, 44, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(74, 144, 226, 0.08) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .other-rooms-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .other-rooms-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .other-rooms-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            color: var(--brand-white);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-shadow: 0 4px 20px rgba(0, 36, 73, 0.3);
+        }
+
+        .other-rooms-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-light);
+        }
+
+        .rooms-carousel {
+            position: relative;
+            overflow: hidden;
+            padding: 0 60px;
+        }
+
+        .rooms-slider {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .other-room-card {
+            flex: 0 0 calc(33.333% - 1.33rem);
+            background: var(--brand-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 36, 73, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .other-room-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 36, 73, 0.3);
+        }
+
+        .other-room-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+        }
+
+        .other-room-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .other-room-card:hover .other-room-image img {
+            transform: scale(1.1);
+        }
+
+        .other-room-info {
+            padding: 1.5rem;
+        }
+
+        .other-room-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--brand-blue-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .other-room-type {
+            font-size: 0.85rem;
+            color: var(--brand-blue);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .other-room-link {
+            color: var(--brand-yellow);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .other-room-link:hover {
+            color: var(--brand-yellow-bright);
+            gap: 0.6rem;
+        }
+
+        /* Carousel Controls */
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            color: var(--brand-blue-dark);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            z-index: 3;
+            box-shadow: 0 5px 20px rgba(255, 199, 44, 0.3);
+        }
+
+        .carousel-button:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 8px 30px rgba(255, 199, 44, 0.5);
+        }
+
+        .carousel-prev {
+            left: 0;
+        }
+
+        .carousel-next {
+            right: 0;
+        }
+
+        /* Footer */
+        footer {
+            padding: 5rem 3rem 2rem;
+            background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--brand-blue-dark) 100%);
+            border-top: 1px solid rgba(255, 199, 44, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .footer-description {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-yellow);
+            padding-left: 0.5rem;
+        }
+
+        .footer-bottom {
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 199, 44, 0.1);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-white) 100%);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .nav-links.active {
+            display: flex !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0, 31, 63, 0.98) 0%, rgba(0, 60, 113, 0.98) 100%);
+            backdrop-filter: blur(30px);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1000;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .nav-links.active.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Fix breadcrumb positioning for tablet/laptop screens */
+        @media (max-width: 1366px) and (min-width: 1025px) {
+            .breadcrumb {
+                top: 110px;
+                z-index: 1001;
+                padding: 1rem 3rem;
+                background: linear-gradient(180deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+                backdrop-filter: blur(20px);
+            }
+            
+            .room-hero {
+                margin-top: 170px;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .room-hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .room-image-showcase {
+                height: 400px;
+            }
+
+            .amenities-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .other-room-card {
+                flex: 0 0 calc(50% - 1rem);
+            }
+
+            .included-list {
+                grid-template-columns: 1fr;
+            }
+
+            .special-features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            nav.scrolled {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-container {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .breadcrumb {
+                padding: 0.8rem 1.5rem;
+                top: 70px;
+            }
+
+            .room-hero {
+                margin-top: 120px;
+            }
+
+            .room-hero-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .room-image-showcase {
+                height: 300px;
+            }
+
+            .image-badge {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.6rem 1.2rem;
+                font-size: 0.75rem;
+            }
+
+            .floor-indicator {
+                bottom: 1rem;
+                left: 1rem;
+                padding: 0.6rem 1.2rem;
+                font-size: 0.75rem;
+            }
+
+            .room-title {
+                font-size: 2rem;
+            }
+
+            .room-cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+
+            .amenities-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .other-room-card {
+                flex: 0 0 100%;
+            }
+
+            .carousel-button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">DAYS INN NASA</a>
+            <ul class="nav-links">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../about.html" class="nav-link">About</a></li>
+                <li><a href="../guestrooms.html" class="nav-link">Guest Rooms</a></li>
+                <li><a href="../amenities.html" class="nav-link">Amenities</a></li>
+                <li><a href="../gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="../hotel-policies-page.html" class="nav-link">Hotel Policies</a></li>
+                                        <li><a href="../hotel-reviews-page.html" class="nav-link">Reviews</a></li>
+                <li><a href="../specials-page.html" class="nav-link">Specials</a></li>
+                <li><button class="book-now" onclick="window.open('https://www.wyndhamhotels.com/hotel/15443', '_blank')">Book Now</button></li>
+            </ul>
+            <button class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a href="../guestrooms.html" class="back-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                Back to Guest Rooms
+            </a>
+        </div>
+    </div>
+
+    <!-- Room Hero Section -->
+    <section class="room-hero">
+        <div class="room-hero-container">
+            <div class="room-image-showcase">
+                <img src="../Images/guestrooms/card5.avif" alt="1 King Bed Second Floor Non-Smoking Room" class="room-main-image">
+                <div class="image-badge">
+                    <svg class="non-smoking-icon" viewBox="0 0 24 24">
+                        <path d="M2 5.27L3.28 4 20 20.72 18.73 22l-7-7H2v-3h7.73L2 4.27M20.5 13H22v3h-1.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5M18 13h1.5v3H18v-3m.85-8.12c.62-.61 1-1.45 1-2.38h-1.5c0 1.02-.83 1.85-1.85 1.85v1.5c2.24 0 4 1.83 4 4.07V12H22V9.76c0-2.22-1.28-4.14-3.15-5.03m-2.82 2.47H14.5c-1.02 0-1.85-.98-1.85-2s.83-1.75 1.85-1.75V2.1c-1.85 0-3.35 1.5-3.35 3.35s1.5 3.35 3.35 3.35h1.53c1.05 0 1.97.74 1.97 2.05V12H19.5v-1.64c0-1.81-1.6-3.16-3.47-3.16z"/>
+                    </svg>
+                    Non-Smoking
+                </div>
+                <div class="floor-indicator">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                    </svg>
+                    2nd Floor
+                </div>
+            </div>
+            <div class="room-info">
+                <div class="room-category-label">King Room - Non-Smoking</div>
+                <h1 class="room-title">1 King Bed, Second Floor, Stairs Only</h1>
+                <div class="room-highlight">
+                    ✨ Upstairs Interior Corridor - Quieter setting
+                </div>
+                
+                <div class="non-smoking-notice">
+                    <svg class="notice-icon" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <div class="notice-text">
+                        <strong>Non-Smoking Room:</strong> Enjoy a fresh, clean environment in our 100% smoke-free accommodation. Perfect for families and guests who prefer a pristine, odor-free atmosphere.
+                    </div>
+                </div>
+
+                <div class="stairs-notice">
+                    <svg class="stairs-icon" viewBox="0 0 24 24">
+                        <path d="M5 9l1.41 1.41L11 5.83V22h2V5.83l4.59 4.58L19 9l-7-7-7 7z"/>
+                    </svg>
+                    <div class="notice-text">
+                        <strong>Please Note:</strong> This second-floor room is accessible via stairs only; no elevator. Perfect for guests who prefer a quieter, more private setting away from ground-floor activity.
+                    </div>
+                </div>
+
+                <p class="room-description">
+                    The 1 King Bed, Second Floor, Stairs Only, Non-Smoking at NASA Days Inn & Suites is an air-conditioned room with large and comfortable King bed that can easily accommodate up to 2 adults making this a perfect room for couples. This spacious room offers a HDTV w/HBO & Cinemax, coffee maker, microwave,& mini-fridge in a wetbar, iron/ironing board, ceiling fan, and a small sitting area with a work desk. Free WiFi is included. The room includes a private bath with full tub and granite vanity with hairdryer and complimentary toiletries and plush towels.
+                </p>
+
+                <div class="room-features">
+                    <div class="feature-item">
+                        <svg class="feature-icon" viewBox="0 0 24 24">
+                            <path d="M5 9l1.41 1.41L11 5.83V22h2V5.83l4.59 4.58L19 9l-7-7-7 7z"/>
+                        </svg>
+                        <span>Floor: 2nd Floor (Stairs Only)</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" viewBox="0 0 24 24">
+                            <path d="M2 21h19v-2H2v2zM20 8h-3V4h-2v4h-4V4H9v4H6V4H4v4c-1.11 0-2 .89-2 2v8h2v-4h4v4h2v-4h4v4h2v-4h4v4h2v-8c0-1.11-.89-2-2-2z"/>
+                        </svg>
+                        <span>1 King Size Bed</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" viewBox="0 0 24 24">
+                            <path d="M16 9h-1V4h-2v5h-2V4H9v5H8V4H6v5c-1.1 0-2 .9-2 2v5h1.33L6 19h1l.67-3h8.67L17 19h1l.67-3H20v-5c0-1.1-.9-2-2-2z"/>
+                        </svg>
+                        <span>Capacity: 2 Persons</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" viewBox="0 0 24 24">
+                            <path d="M2 5.27L3.28 4 20 20.72 18.73 22l-7-7H2v-3h7.73L2 4.27M20.5 13H22v3h-1.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5M18 13h1.5v3H18v-3m.85-8.12c.62-.61 1-1.45 1-2.38h-1.5c0 1.02-.83 1.85-1.85 1.85v1.5c2.24 0 4 1.83 4 4.07V12H22V9.76c0-2.22-1.28-4.14-3.15-5.03m-2.82 2.47H14.5c-1.02 0-1.85-.98-1.85-2s.83-1.75 1.85-1.75V2.1c-1.85 0-3.35 1.5-3.35 3.35s1.5 3.35 3.35 3.35h1.53c1.05 0 1.97.74 1.97 2.05V12H19.5v-1.64c0-1.81-1.6-3.16-3.47-3.16z"/>
+                        </svg>
+                        <span>100% Non-Smoking</span>
+                    </div>
+                </div>
+
+                <div class="special-features">
+                    <h3 class="special-features-title">Why Choose This Room</h3>
+                    <div class="special-features-grid">
+                        <div class="special-feature">
+                            <svg class="special-feature-icon" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Perfect for Couples
+                        </div>
+                        <div class="special-feature">
+                            <svg class="special-feature-icon" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Quieter Upper Floor
+                        </div>
+                        <div class="special-feature">
+                            <svg class="special-feature-icon" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Work Desk Area
+                        </div>
+                        <div class="special-feature">
+                            <svg class="special-feature-icon" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Smoke-Free Environment
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="room-cta-buttons">
+                    <a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank" class="btn-primary">Book This Room</a>
+                    <a href="#amenities" class="btn-secondary">View Amenities</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section class="amenities-section" id="amenities">
+        <div class="amenities-container">
+            <h2 class="section-title">Room Amenities & Services</h2>
+            
+            <!-- Included Services Box -->
+            <div class="included-services">
+                <h3 class="included-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+                    </svg>
+                    Complimentary Services Included
+                </h3>
+                <div class="included-list">
+                    <div class="included-item">
+                        <svg class="included-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        Grab & Go Breakfast
+                    </div>
+                    <div class="included-item">
+                        <svg class="included-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        High-Speed WiFi
+                    </div>
+                    <div class="included-item">
+                        <svg class="included-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        Local Calls
+                    </div>
+                </div>
+            </div>
+            
+            <div class="amenities-grid">
+                <div class="amenity-group">
+                    <h3 class="amenity-group-title">General Services</h3>
+                    <ul class="amenity-list">
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M22 11h-4.17l3.24-3.24-1.41-1.42L15 11h-2V9l4.66-4.66-1.42-1.41L13 6.17V2h-2v4.17L7.76 2.93 6.34 4.34 11 9v2H9L4.34 6.34 2.93 7.76 6.17 11H2v2h4.17l-3.24 3.24 1.41 1.42L9 13h2v2l-4.66 4.66 1.42 1.41L11 17.83V22h2v-4.17l3.24 3.24 1.42-1.41L13 15v-2h2l4.66 4.66 1.41-1.42L17.83 13H22z"/>
+                            </svg>
+                            Air Conditioner
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM8 17.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM16 17.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM13 12h-2V7h2v5z"/>
+                            </svg>
+                            Heater
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M12 2l1.09 3.26 3.91 1.43-1.43 3.91L19.48 12l-3.91 1.4 1.43 3.91L12 22l-1.09-3.26-3.91-1.43 1.43-3.91L4.52 12l3.91-1.4L7 6.69L12 2zm0 6c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/>
+                            </svg>
+                            Ceiling Fan
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M6.8 10.61L5.37 9.19C5.73 8.79 6.59 8 7.75 8c.8 0 1.39.39 1.81.67.31.21.51.33.69.33s.37-.12.69-.33c.41-.28 1-.67 1.81-.67s1.39.39 1.81.67c.31.21.51.33.69.33s.37-.12.69-.33c.41-.28 1-.67 1.81-.67 1.16 0 2.02.79 2.38 1.19l-1.43 1.42c-.18-.15-.43-.31-.75-.31-.37 0-.7.22-.98.42-.46.32-1.06.68-1.97.68s-1.51-.36-1.97-.68c-.28-.2-.61-.42-.98-.42-.37 0-.7.22-.98.42-.46.32-1.06.68-1.97.68s-1.51-.36-1.97-.68c-.28-.2-.61-.42-.98-.42-.32 0-.57.16-.75.31z"/>
+                            </svg>
+                            Microwave
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M8 5h10v7h2V5c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v7h2V5zm10 14H8c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2zM20 13H4c-1.1 0-2 .9-2 2v2c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-2c0-1.1-.9-2-2-2z"/>
+                            </svg>
+                            Mini-fridge
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.9 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"/>
+                            </svg>
+                            Coffee/Tea Maker
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                            </svg>
+                            Hair Dryer
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 1.74.5 3.37 1.41 4.84.95 1.54 2.2 2.86 3.16 4.4.47.75.81 1.45 1.17 2.26.26.55.47 1.5 1.26 1.5s1-.95 1.25-1.5c.37-.81.7-1.51 1.17-2.26.96-1.53 2.21-2.85 3.16-4.4C16.5 12.37 17 10.74 17 9c0-3.87-3.13-7-7-7z"/>
+                            </svg>
+                            Iron & Ironing Board
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M18 2.01L6 2c-1.1 0-2 .89-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.11-.9-1.99-2-1.99zM18 20H6v-9.02h12V20zm0-11H6V4h12v5z"/>
+                            </svg>
+                            Work Desk with Ergonomic Chair
+                        </li>
+                    </ul>
+                </div>
+                <div class="amenity-group">
+                    <h3 class="amenity-group-title">Bathroom</h3>
+                    <ul class="amenity-list">
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M7 4v2c0 .55-.45 1-1 1s-1-.45-1-1V4c0-.55.45-1 1-1s1 .45 1 1zm4 0v2c0 .55-.45 1-1 1s-1-.45-1-1V4c0-.55.45-1 1-1s1 .45 1 1zm4 0v2c0 .55-.45 1-1 1s-1-.45-1-1V4c0-.55.45-1 1-1s1 .45 1 1zm4 0v2c0 .55-.45 1-1 1s-1-.45-1-1V4c0-.55.45-1 1-1s1 .45 1 1zM5 9v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V9H5z"/>
+                            </svg>
+                            Private Bathroom
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4zm2.5 2.25l1.41-1.41L16.75 12H15V9.5l4.75-4.75L21.16 6.16 20 7.32V12h1.75L17.91 15.84z"/>
+                            </svg>
+                            Tub with Shower
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M16 15v1.26l2 1.01V15h-2zM12 7c2.76 0 5 2.24 5 5v1.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5V12c0-2.21-1.79-4-4-4S8 9.79 8 12v1.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5V12c0-2.76 2.24-5 5-5z"/>
+                            </svg>
+                            Toilet
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            Toiletries
+                        </li>
+                    </ul>
+                </div>
+                <div class="amenity-group">
+                    <h3 class="amenity-group-title">Technology</h3>
+                    <ul class="amenity-list">
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M1 9l2-2v8l-2-2v-4zm4.67-1.5L7.5 5.67 12 10.17l4.5-4.5 1.83 1.83L12 13.83 5.67 7.5z"/>
+                            </svg>
+                            WiFi
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/>
+                            </svg>
+                            HDTV
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V6h5.17l2 2H20v10z"/>
+                            </svg>
+                            DirecTV Satellite
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M9.29 6.71c-.39.39-.39 1.02 0 1.41L11.17 10H2v4h9.17l-1.88 1.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l3.59-3.59c.39-.39.39-1.02 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01zM20 8V4h-2v4h-4v2h4v4h2v-4h4V8z"/>
+                            </svg>
+                            HBO
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 6L12 10.5 8.5 8 12 5.5 15.5 8zM8.5 16L12 13.5 15.5 16 12 18.5 8.5 16z"/>
+                            </svg>
+                            Cinemax
+                        </li>
+                        <li class="amenity-item">
+                            <svg class="amenity-icon" viewBox="0 0 24 24">
+                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM15.1 8H8.9V6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2z"/>
+                            </svg>
+                            RFID Door Lock
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Other Rooms Section -->
+    <section class="other-rooms-section">
+        <div class="other-rooms-container">
+            <div class="other-rooms-header">
+                <h2 class="other-rooms-title">Explore Other Rooms</h2>
+                <p class="other-rooms-subtitle">Find the perfect accommodation for your stay</p>
+            </div>
+            <div class="rooms-carousel">
+                <button class="carousel-button carousel-prev" onclick="slideRooms(-1)">‹</button>
+                <button class="carousel-button carousel-next" onclick="slideRooms(1)">›</button>
+                <div class="rooms-slider" id="roomsSlider">
+                    <!-- Room 1 -->
+                    <div class="other-room-card">
+                        <div class="other-room-image">
+                            <img src="../Images/guestrooms/card6.avif" alt="1 King Bed Non-Smoking">
+                        </div>
+                        <div class="other-room-info">
+                            <h3 class="other-room-name">1 King Bed, Non-Smoking</h3>
+                            <p class="other-room-type">Ground Floor</p>
+                            <a href="NK2.html" class="other-room-link">View Room →</a>
+                        </div>
+                    </div>
+                    <!-- Room 2 -->
+                    <div class="other-room-card">
+                        <div class="other-room-image">
+                            <img src="../Images/guestrooms/card1.avif" alt="1 King Bed Smoking">
+                        </div>
+                        <div class="other-room-info">
+                            <h3 class="other-room-name">1 King Bed, Smoking</h3>
+                            <p class="other-room-type">Ground Floor</p>
+                            <a href="K12.html" class="other-room-link">View Room →</a>
+                        </div>
+                    </div>
+                    <!-- Room 3 -->
+                    <div class="other-room-card">
+                        <div class="other-room-image">
+                            <img src="../Images/guestrooms/card3.avif" alt="1 Queen Bed Second Floor">
+                        </div>
+                        <div class="other-room-info">
+                            <h3 class="other-room-name">1 Queen Bed, Second Floor</h3>
+                            <p class="other-room-type">Interior Stairs Only</p>
+                            <a href="NQ1.html" class="other-room-link">View Room →</a>
+                        </div>
+                    </div>
+                    <!-- Room 4 -->
+                    <div class="other-room-card">
+                        <div class="other-room-image">
+                            <img src="../Images/guestrooms/card7.avif" alt="2 Queen Beds">
+                        </div>
+                        <div class="other-room-info">
+                            <h3 class="other-room-name">2 Queen Beds, Second Floor</h3>
+                            <p class="other-room-type">Family Room</p>
+                            <a href="NQQ1.html" class="other-room-link">View Room →</a>
+                        </div>
+                    </div>
+                    <!-- Room 5 -->
+                    <div class="other-room-card">
+                        <div class="other-room-image">
+                            <img src="../Images/guestrooms/card2.avif" alt="1 King Bed Accessible">
+                        </div>
+                        <div class="other-room-info">
+                            <h3 class="other-room-name">1 King Bed, Accessible</h3>
+                            <p class="other-room-type">Wheelchair Accessible</p>
+                            <a href="PNK1.html" class="other-room-link">View Room →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">DAYS INN & SUITES NASA</div>
+                <p class="footer-description">
+                    One of the area's best hotels in Webster, TX near Clear Lake and within the Houston metropolitan area. Offering location convenience, affordability, and comfort with true Southern Texas hospitality.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Hotel Features</h4>
+                <ul class="footer-links">
+                    <li><a href="guestrooms.html">63 Guest Rooms</a></li>
+                    <li><a href="gallery.html">Photo Gallery</a></li>
+                    <li><a href="amenities.html">Free Grab & Go Breakfast</a></li>
+                    <li><a href="amenities.html">Indoor Heated Pool</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Nearby Attractions</h4>
+                <ul class="footer-links">
+                    <li><a href="#">NASA Johnson Space Center</a></li>
+                    <li><a href="#">Kemah Boardwalk</a></li>
+                    <li><a href="#">Schlitterbahn Galveston</a></li>
+                    <li><a href="#">Gulf Greyhound Park</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Guest Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#">24/7 Virtual Front Desk</a></li>
+                    <li><a href="#">Express Check-In/Out</a></li>
+                    <li><a href="#">Multilingual Staff</a></li>
+                    <li><a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank">Make a Reservation</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Days Inn & Suites NASA. 201 North Texas Ave, Webster, Texas 77598 | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Carousel Functionality
+        let currentSlide = 0;
+        const slider = document.getElementById('roomsSlider');
+        const cards = document.querySelectorAll('.other-room-card');
+        let cardsPerView = window.innerWidth > 1024 ? 3 : window.innerWidth > 768 ? 2 : 1;
+
+        function updateCardsPerView() {
+            cardsPerView = window.innerWidth > 1024 ? 3 : window.innerWidth > 768 ? 2 : 1;
+        }
+
+        window.addEventListener('resize', updateCardsPerView);
+
+        function slideRooms(direction) {
+            const totalCards = cards.length;
+            const maxSlide = Math.max(0, totalCards - cardsPerView);
+            
+            currentSlide += direction;
+            
+            if (currentSlide < 0) {
+                currentSlide = maxSlide;
+            } else if (currentSlide > maxSlide) {
+                currentSlide = 0;
+            }
+            
+            const slideWidth = 100 / cardsPerView;
+            const translateX = -currentSlide * slideWidth;
+            slider.style.transform = `translateX(${translateX}%)`;
+        }
+
+        // Auto-slide every 5 seconds
+        setInterval(() => {
+            slideRooms(1);
+        }, 5000);
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            
+            if (navLinks.classList.contains('active')) {
+                setTimeout(() => navLinks.classList.add('visible'), 10);
+                document.body.style.overflow = 'hidden';
+            } else {
+                navLinks.classList.remove('visible');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active', 'visible');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active', 'visible');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe amenity groups
+        document.querySelectorAll('.amenity-group').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Animate included services box
+        const includedBox = document.querySelector('.included-services');
+        if (includedBox) {
+            includedBox.style.opacity = '0';
+            includedBox.style.transform = 'translateY(30px)';
+            includedBox.style.transition = 'all 0.6s ease';
+            observer.observe(includedBox);
+        }
+
+        // Animate special features box
+        const specialBox = document.querySelector('.special-features');
+        if (specialBox) {
+            specialBox.style.opacity = '0';
+            specialBox.style.transform = 'translateY(30px)';
+            specialBox.style.transition = 'all 0.6s ease';
+            observer.observe(specialBox);
+        }
+    </script>
+</body>
+</html>

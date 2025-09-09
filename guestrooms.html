@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Rooms | Days Inn & Suites NASA Webster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@200;300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Days Inn Brand Colors */
+            --brand-blue: #003c71;
+            --brand-blue-dark: #002449;
+            --brand-blue-light: #0054a6;
+            --brand-yellow: #ffc72c;
+            --brand-yellow-bright: #ffdd00;
+            --brand-yellow-soft: #ffe380;
+            --brand-white: #ffffff;
+            
+            /* Luxury Variations */
+            --midnight-blue: #001f3f;
+            --royal-blue: #004080;
+            --sky-blue: #4a90e2;
+            --champagne: #fff5d6;
+            --pearl: #fafafa;
+            --silver: #e8e8e8;
+            
+            /* Functional Colors */
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-blue: rgba(0, 60, 113, 0.05);
+            --text-light: rgba(255, 255, 255, 0.95);
+            --text-muted: rgba(255, 255, 255, 0.75);
+            --text-dark: #002449;
+            --shadow: rgba(0, 36, 73, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--brand-blue) 100%);
+            color: var(--brand-white);
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+            min-width: 320px;
+        }
+
+        /* Premium Noise Texture */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.02;
+            z-index: 1;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 199, 44, 0.01) 35px, rgba(255, 199, 44, 0.01) 70px),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="noise"><feTurbulence baseFrequency="0.9"/></filter><rect width="200" height="200" filter="url(%23noise)" opacity="0.4"/></svg>');
+        }
+
+        /* Premium Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(180deg, rgba(0, 31, 63, 0.95) 0%, rgba(0, 60, 113, 0.9) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 199, 44, 0.15);
+        }
+
+        nav.scrolled {
+            background: linear-gradient(180deg, rgba(0, 36, 73, 0.98) 0%, rgba(0, 60, 113, 0.95) 100%);
+            backdrop-filter: blur(30px) saturate(200%);
+            padding: 1rem 3rem;
+            border-bottom: 1px solid rgba(255, 199, 44, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 36, 73, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--brand-white) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.2));
+        }
+
+        .logo:hover {
+            filter: drop-shadow(0 4px 20px rgba(255, 199, 44, 0.4));
+            transform: translateY(-1px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--brand-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            position: relative;
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 4px rgba(0, 36, 73, 0.3);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            transition: width 0.3s ease;
+            box-shadow: 0 2px 10px rgba(255, 199, 44, 0.5);
+        }
+
+        .nav-link:hover {
+            color: var(--brand-yellow-soft);
+            transform: translateY(-1px);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--brand-yellow-soft);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .book-now {
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 50%, var(--brand-yellow) 100%);
+            color: var(--brand-blue-dark);
+            border: 2px solid transparent;
+            padding: 0.9rem 2.2rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 3px;
+            box-shadow: 
+                0 2px 10px rgba(255, 199, 44, 0.3),
+                0 10px 40px rgba(255, 199, 44, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 10px rgba(0, 36, 73, 0.1);
+            text-shadow: 0 1px 2px rgba(0, 36, 73, 0.2);
+            transform-style: preserve-3d;
+        }
+
+        .book-now::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            transform: translateX(-100%) skewX(-45deg);
+            transition: transform 0.6s ease;
+        }
+
+        .book-now:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 4px 20px rgba(255, 199, 44, 0.5),
+                0 15px 50px rgba(255, 199, 44, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -3px 15px rgba(0, 36, 73, 0.15);
+            background: linear-gradient(135deg, var(--brand-yellow-bright) 0%, var(--brand-yellow) 50%, var(--brand-yellow-bright) 100%);
+            border-color: rgba(255, 199, 44, 0.3);
+        }
+
+        .book-now:hover::before {
+            transform: translateX(100%) skewX(-45deg);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-white) 100%);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .nav-links.active {
+            display: flex !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0, 31, 63, 0.98) 0%, rgba(0, 60, 113, 0.98) 100%);
+            backdrop-filter: blur(30px);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1000;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .nav-links.active.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section - Premium Blue */
+        .rooms-hero {
+            min-height: 100vh;
+            padding-top: 140px; /* Account for fixed navigation with proper spacing */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--midnight-blue) 0%, var(--brand-blue) 50%, var(--royal-blue) 100%);
+        }
+
+        .rooms-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 199, 44, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            z-index: 1;
+            animation: pulse-bg 8s ease infinite;
+        }
+
+        @keyframes pulse-bg {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 1000px;
+            padding: 0 2rem;
+        }
+
+        .hero-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.1s forwards;
+            font-weight: 500;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.3));
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.2s forwards;
+            font-weight: 700;
+            text-shadow: 0 4px 20px rgba(0, 36, 73, 0.3);
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-light);
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeInUp 1s 0.3s forwards;
+            text-shadow: 0 2px 10px rgba(0, 36, 73, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Room Filters - Premium Style */
+        .room-filters {
+            padding: 3rem 3rem 2rem;
+            background: linear-gradient(180deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+            border-bottom: 1px solid rgba(255, 199, 44, 0.2);
+            position: sticky;
+            top: 85px;
+            z-index: 999;
+            backdrop-filter: blur(20px) saturate(180%);
+        }
+
+        .filters-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 199, 44, 0.05) 100%);
+            border: 1px solid rgba(255, 199, 44, 0.3);
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            color: var(--brand-blue-dark);
+            border-color: var(--brand-yellow);
+            box-shadow: 0 4px 15px rgba(255, 199, 44, 0.3);
+        }
+
+        .filter-btn.active::before,
+        .filter-btn:hover::before {
+            width: 100%;
+        }
+
+        /* Rooms Grid Section - Premium White Background */
+        .rooms-section {
+            padding: 4rem 3rem 8rem;
+            background: linear-gradient(180deg, var(--pearl) 0%, var(--brand-white) 100%);
+            position: relative;
+        }
+
+        .rooms-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--brand-yellow) 50%, transparent 100%);
+        }
+
+        .rooms-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            color: var(--brand-blue-dark);
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 36, 73, 0.1);
+        }
+
+        .section-subtitle {
+            font-size: 1.15rem;
+            color: var(--brand-blue);
+            line-height: 1.6;
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 3rem;
+        }
+
+        .room-card {
+            background: var(--brand-white);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 36, 73, 0.15);
+            overflow: hidden;
+            position: relative;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 60, 113, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .room-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--brand-yellow), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .room-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                0 20px 50px rgba(0, 36, 73, 0.2),
+                0 0 0 2px var(--brand-yellow);
+        }
+
+        .room-image-container {
+            height: 280px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+        }
+
+        .room-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+            filter: brightness(1.05) contrast(1.1);
+        }
+
+        .room-card:hover .room-img {
+            transform: scale(1.1);
+        }
+
+        .room-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            color: var(--brand-blue-dark);
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(255, 199, 44, 0.4);
+            border-radius: 3px;
+        }
+
+        .floor-badge {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: linear-gradient(135deg, rgba(0, 60, 113, 0.9) 0%, rgba(0, 36, 73, 0.9) 100%);
+            color: var(--brand-yellow);
+            padding: 0.5rem 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0, 36, 73, 0.4);
+            border-radius: 3px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 199, 44, 0.3);
+        }
+
+        .room-details {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .room-category {
+            font-size: 0.85rem;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 1px 3px rgba(255, 199, 44, 0.2));
+        }
+
+        .room-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            color: var(--brand-blue-dark);
+            line-height: 1.2;
+        }
+
+        .room-desc {
+            color: var(--brand-blue);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            height: 100px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            line-clamp: 4;
+            -webkit-box-orient: vertical;
+        }
+
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 60, 113, 0.1);
+        }
+
+        .room-feature {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, rgba(0, 60, 113, 0.05) 0%, rgba(255, 199, 44, 0.05) 100%);
+            font-size: 0.8rem;
+            color: var(--brand-blue);
+            border: 1px solid rgba(0, 60, 113, 0.2);
+            font-weight: 500;
+            text-align: center;
+            min-height: 40px;
+            border-radius: 3px;
+        }
+
+        .room-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: auto;
+        }
+
+        .room-btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            min-width: 0;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .btn-details {
+            background: transparent;
+            color: var(--brand-blue);
+            border: 2px solid var(--brand-blue);
+        }
+
+        .btn-details:hover {
+            background: var(--brand-blue);
+            color: var(--brand-white);
+            box-shadow: 0 4px 15px rgba(0, 36, 73, 0.3);
+        }
+
+        .btn-availability {
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            color: var(--brand-blue-dark);
+            border: 2px solid var(--brand-yellow);
+            font-weight: 700;
+        }
+
+        .btn-availability:hover {
+            background: linear-gradient(135deg, var(--brand-yellow-bright) 0%, var(--brand-yellow) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 199, 44, 0.4);
+        }
+
+        .room-occupancy {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--brand-blue);
+            font-size: 0.9rem;
+        }
+
+        .occupancy-icon {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .occupancy-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--brand-yellow);
+            filter: drop-shadow(0 2px 4px rgba(255, 199, 44, 0.3));
+        }
+
+        /* CTA Section - Premium Blue Gradient */
+        .rooms-cta {
+            padding: 6rem 3rem;
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--midnight-blue) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rooms-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 199, 44, 0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            color: var(--brand-white);
+            text-shadow: 0 4px 20px rgba(0, 36, 73, 0.3);
+        }
+
+        .cta-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-bright) 100%);
+            color: var(--brand-blue-dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+            box-shadow: 
+                0 4px 20px rgba(255, 199, 44, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 8px 30px rgba(255, 199, 44, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            background: linear-gradient(135deg, var(--brand-yellow-bright) 0%, var(--brand-yellow) 100%);
+        }
+
+        /* Footer - Matching Gallery Style */
+        footer {
+            padding: 5rem 3rem 2rem;
+            background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--brand-blue-dark) 100%);
+            border-top: 1px solid rgba(255, 199, 44, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            filter: drop-shadow(0 2px 10px rgba(255, 199, 44, 0.3));
+        }
+
+        .footer-description {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--brand-yellow) 0%, var(--brand-yellow-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-yellow);
+            padding-left: 0.5rem;
+            text-shadow: 0 2px 10px rgba(255, 199, 44, 0.3);
+        }
+
+        .footer-bottom {
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 199, 44, 0.1);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .rooms-grid {
+                grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            nav.scrolled {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-container {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .rooms-hero {
+                padding: 0 0.8rem;
+                min-height: 100vh;
+                height: auto;
+            }
+
+            .hero-content {
+                padding: 6rem 0.8rem 4rem;
+            }
+
+            .room-filters {
+                padding: 2rem 1rem 1rem;
+                top: 60px;
+            }
+
+            .filters-container {
+                gap: 0.8rem;
+                justify-content: center;
+                max-width: 100%;
+            }
+
+            .filter-btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.75rem;
+                min-width: 100px;
+                flex: 0 1 auto;
+            }
+
+            .rooms-section {
+                padding: 3rem 1rem 5rem;
+            }
+
+            .rooms-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .room-card {
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            .room-image-container {
+                height: 240px;
+            }
+
+            .room-details {
+                padding: 2rem 1.5rem;
+            }
+
+            .room-name {
+                font-size: clamp(1.4rem, 4vw, 1.6rem);
+                line-height: 1.3;
+            }
+
+            .room-desc {
+                font-size: 0.9rem;
+                height: auto;
+                -webkit-line-clamp: 3;
+                line-clamp: 3;
+            }
+
+            .room-features {
+                gap: 0.6rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .room-feature {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.8rem;
+                min-height: 36px;
+            }
+
+            .room-actions {
+                gap: 0.5rem;
+                flex-direction: column;
+            }
+
+            .room-btn {
+                padding: 0.8rem 1rem;
+                font-size: 0.8rem;
+                white-space: normal;
+                text-align: center;
+            }
+
+            .rooms-cta {
+                padding: 4rem 1rem;
+            }
+
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 0.85rem;
+                display: block;
+                text-align: center;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+
+            footer {
+                padding: 4rem 1rem 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                text-align: center;
+            }
+        }
+
+        /* Extra Small Mobile (320px - iPhone SE and similar) */
+        @media (max-width: 375px) {
+            .rooms-hero {
+                padding-top: 100px;
+                min-height: 90vh;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+
+            .hero-content {
+                padding: 4rem 0.5rem 3rem;
+                max-width: 100%;
+            }
+
+            .hero-subtitle {
+                font-size: 0.8rem;
+                letter-spacing: 0.15em;
+                margin-bottom: 1rem;
+            }
+
+            .hero-title {
+                font-size: clamp(2.2rem, 12vw, 3.5rem);
+                line-height: 1.05;
+                margin-bottom: 1.2rem;
+                letter-spacing: -0.01em;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+                line-height: 1.5;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+
+            .room-filters {
+                padding: 1.5rem 0.5rem 0.8rem;
+                top: 50px;
+            }
+
+            .filters-container {
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.7rem;
+                min-width: 80px;
+                flex: 1 1 calc(50% - 0.25rem);
+                max-width: calc(50% - 0.25rem);
+            }
+
+            .rooms-section {
+                padding: 2.5rem 0.5rem 4rem;
+            }
+
+            .room-card {
+                max-width: 100%;
+            }
+
+            .room-image-container {
+                height: 200px;
+            }
+
+            .room-info {
+                padding: 1.2rem;
+            }
+
+            .room-type {
+                font-size: 0.75rem;
+            }
+
+            .room-name {
+                font-size: 1.3rem;
+                line-height: 1.2;
+                margin-bottom: 0.8rem;
+            }
+
+            .room-description {
+                font-size: 0.9rem;
+                line-height: 1.4;
+                margin-bottom: 1rem;
+            }
+
+            .room-features {
+                gap: 0.6rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .feature-item {
+                font-size: 0.8rem;
+            }
+
+            .feature-icon {
+                width: 16px;
+                height: 16px;
+            }
+
+            .room-cta {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.8rem;
+            }
+
+            nav {
+                padding: 0.6rem 0.8rem;
+            }
+
+            nav.scrolled {
+                padding: 0.6rem 0.8rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Noise Texture -->
+    <div class="noise"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">DAYS INN NASA</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="guestrooms.html" class="nav-link active">Guest Rooms</a></li>
+                <li><a href="amenities.html" class="nav-link">Amenities</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="hotel-policies-page.html" class="nav-link">Hotel Policies</a></li>
+                <li><a href="hotel-reviews-page.html" class="nav-link">Reviews</a></li>
+                <li><a href="specials-page.html" class="nav-link">Specials</a></li>
+                <li><button class="book-now" onclick="window.open('https://www.wyndhamhotels.com/hotel/15443', '_blank')">Book Now</button></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="rooms-hero">
+        <div class="hero-content">
+            <div class="hero-subtitle">63 Comfortable Guest Rooms</div>
+            <h1 class="hero-title">Our Accommodations</h1>
+            <p class="hero-description">
+                Choose from our selection of contemporary rooms and suites, each thoughtfully designed with modern amenities and comfort in mind
+            </p>
+        </div>
+    </section>
+
+    <!-- Room Filters -->
+    <section class="room-filters">
+        <div class="filters-container">
+            <button class="filter-btn active" data-filter="all">All Rooms</button>
+            <button class="filter-btn" data-filter="king">King Rooms</button>
+            <button class="filter-btn" data-filter="queen">Queen Rooms</button>
+            <button class="filter-btn" data-filter="suite">Suites</button>
+            <button class="filter-btn" data-filter="accessible">Accessible</button>
+        </div>
+    </section>
+
+    <!-- Rooms Grid Section -->
+    <section class="rooms-section">
+        <div class="rooms-container">
+            <div class="section-header">
+                <h2 class="section-title">Select Your Perfect Room</h2>
+                <p class="section-subtitle">
+                    All rooms include complimentary Grab & Go breakfast, WiFi, Local Calls, Parking, and access to our indoor pool
+                </p>
+            </div>
+
+            <div class="rooms-grid">
+                <!-- Ground Floor Rooms -->
+                
+                <!-- Room 1: King Bed Smoking (Ground Floor) -->
+                <div class="room-card" data-category="king" id="room-king-smoking">
+                    <div class="room-image-container">
+                        <img src="Images/guestrooms/card1.avif" alt="1 King Bed Smoking Room with LVP Flooring" class="room-img">
+                        <span class="floor-badge">Ground Floor</span>
+                        <span class="room-badge">Smoking</span>
+                    </div>
+                    <div class="room-details">
+                        <h3 class="room-name">1 King Bed, Smoking, Ground Floor</h3>
+                        <div class="room-occupancy">
+                            <div class="occupancy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                <span>Up to 2 Adults</span>
+                            </div>
+                        </div>
+                        <p class="room-desc">
+                            Air-conditioned room with large and comfortable King bed featuring LVP flooring. This spacious room offers HDTV w/HBO & Cinemax, coffee maker, microwave, fridge in a wetbar, iron/ironing board, ceiling fan, and a small sitting area with a work desk. Free WiFi included. Private bath with full tub and granite vanity with hairdryer, complimentary toiletries and plush towels.
+                        </p>
+
+                        <div class="room-actions">
+                            <a href="pages/K12.html" class="room-btn btn-details">See Details</a>
+                            <a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank" class="room-btn btn-availability">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room 2: 2 Queen Beds, Ground Floor, Non-Smoking -->
+                <div class="room-card" data-category="queen" id="room-queen-first-floor">
+                    <div class="room-image-container">
+                        <img src="Images/guestrooms/card2.avif" alt="2 Queen Beds Ground Floor Non-Smoking Room" class="room-img">
+                        <span class="floor-badge">Ground Floor</span>
+                        <span class="room-badge">Non-Smoking</span>
+                    </div>
+                    <div class="room-details">
+                        <h3 class="room-name">2 Queen Beds, Ground Floor, Non-Smoking</h3>
+                        <div class="room-occupancy">
+                            <div class="occupancy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                <span>Up to 4 Adults</span>
+                            </div>
+                        </div>
+                        <p class="room-desc">
+                            Ground floor air-conditioned room with two Queen beds. Easy access and spacious layout with HDTV w/HBO & Cinemax, coffee maker, microwave, fridge in a wetbar, iron/ironing board, ceiling fan, and work desk. Free WiFi included.
+                        </p>
+
+                        <div class="room-actions">
+                            <a href="pages/NQQ2.html" class="room-btn btn-details">See Details</a>
+                            <a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank" class="room-btn btn-availability">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room 3: 1 King Bed, Non-Smoking (Ground Floor) -->
+                <div class="room-card" data-category="king" id="room-king-non-smoking">
+                    <div class="room-image-container">
+                        <img src="Images/guestrooms/card6.avif" alt="1 King Bed Non-Smoking Room with LVP Flooring" class="room-img">
+                        <span class="floor-badge">Ground Floor</span>
+                        <span class="room-badge">Non-Smoking</span>
+                    </div>
+                    <div class="room-details">
+                        <h3 class="room-name">1 King Bed, Non-Smoking, Ground Floor</h3>
+                        <div class="room-occupancy">
+                            <div class="occupancy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                <span>Up to 2 Adults</span>
+                            </div>
+                        </div>
+                        <p class="room-desc">
+                            Air-conditioned room with large and comfortable King bed perfect for couples featuring LVP flooring. This spacious room offers HDTV w/HBO & Cinemax, coffee maker, microwave, fridge in a wetbar, iron/ironing board, ceiling fan, and a small sitting area with a work desk. Free WiFi included. Private bath with full tub and granite vanity with hairdryer.
+                        </p>
+
+                        <div class="room-actions">
+                            <a href="pages/NK2.html" class="room-btn btn-details">See Details</a>
+                            <a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank" class="room-btn btn-availability">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room 4: 1 King Bed, Accessible (Ground Floor) -->
+                <div class="room-card" data-category="accessible king" id="room-king-accessible">
+                    <div class="room-image-container">
+                        <img src="Images/guestrooms/card8.jpg" alt="1 King Bed Accessible Room" class="room-img">
+                        <span class="floor-badge">Ground Floor</span>
+                        <span class="room-badge">Accessible</span>
+                    </div>
+                    <div class="room-details">
+                        <h3 class="room-name">1 King Bed, Accessible, Ground Floor, Non-Smoking</h3>
+                        <div class="room-occupancy">
+                            <div class="occupancy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                <span>Up to 2 Adults</span>
+                            </div>
+                        </div>
+                        <p class="room-desc">
+                            Designed for guests with additional needs, this accessible room features a large and comfortable King bed. Spacious room offers HDTV w/HBO & Cinemax, coffee maker, microwave, fridge in a wetbar, iron/ironing board, ceiling fan, and accessible work desk. Free WiFi included. Accessible bathroom with full tub and granite vanity.
+                        </p>
+
+                        <div class="room-actions">
+                            <a href="pages/PNK1.html" class="room-btn btn-details">See Details</a>
+                            <a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank" class="room-btn btn-availability">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upstairs Rooms -->
+                
+                <!-- Room 5: 1 Queen Bed, Upstairs, Non-Smoking -->
+                <div class="room-card" data-category="queen" id="room-queen-second-floor-single">
+                    <div class="room-image-container">
+                        <img src="Images/guestrooms/card3.avif" alt="1 Queen Bed Upstairs Non-Smoking Room" class="room-img">
+                        <span class="floor-badge">Upstairs</span>
+                        <span class="room-badge">Non-Smoking</span>
+                    </div>
+                    <div class="room-details">
+                        <h3 class="room-name">1 Queen Bed, Upstairs, Non-Smoking</h3>
+                        <div class="room-occupancy">
+                            <div class="occupancy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                <span>Up to 2 Adults</span>
+                            </div>
+                        </div>
+                        <p class="room-desc">
+                            Second floor non-smoking room with one Queen bed. Features HDTV w/HBO & Cinemax, coffee maker, microwave, fridge in a wetbar, iron/ironing board, ceiling fan, and work desk. Free WiFi included.
+                        </p>
+
+                        <div class="room-actions">
+                            <a href="pages/NQ1.html" class="room-btn btn-details">See Details</a>
+                            <a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank" class="room-btn btn-availability">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room 6: 1 King Bed, Studio Suite, Upstairs, Non-Smoking -->
+                <div class="room-card" data-category="suite" id="room-king-studio-suite">
+                    <div class="room-image-container">
+                        <img src="Images/guestrooms/card4.avif" alt="1 King Bed Studio Suite Non-Smoking" class="room-img">
+                        <span class="floor-badge">Upstairs</span>
+                        <span class="room-badge">Suite</span>
+                    </div>
+                    <div class="room-details">
+                        <h3 class="room-name">1 King Bed, Studio Suite, Upstairs, Non-Smoking</h3>
+                        <div class="room-occupancy">
+                            <div class="occupancy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                <span>Up to 2 Adults</span>
+                            </div>
+                        </div>
+                        <p class="room-desc">
+                            Spacious non-smoking studio suite with sofa bed, sitting area, and kitchenette. Includes HDTV w/HBO & Cinemax, coffee maker, microwave, oven, fridge in a wetbar, iron/ironing board, ceiling fan, and work desk. Free WiFi included.
+                        </p>
+
+                        <div class="room-actions">
+                            <a href="pages/SNK1.html" class="room-btn btn-details">See Details</a>
+                            <a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank" class="room-btn btn-availability">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room 7: 1 King Bed, Upstairs, Non-Smoking -->
+                <div class="room-card" data-category="king" id="room-king-second-floor">
+                    <div class="room-image-container">
+                        <img src="Images/guestrooms/card5.avif" alt="1 King Bed Upstairs Non-Smoking Room" class="room-img">
+                        <span class="floor-badge">Upstairs</span>
+                        <span class="room-badge">Non-Smoking</span>
+                    </div>
+                    <div class="room-details">
+                        <h3 class="room-name">1 King Bed, Upstairs, Non-Smoking</h3>
+                        <div class="room-occupancy">
+                            <div class="occupancy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                <span>Up to 2 Adults</span>
+                            </div>
+                        </div>
+                        <p class="room-desc">
+                            Second floor air-conditioned room with large and comfortable King bed. Interior stairs only access. This spacious room offers HDTV w/HBO & Cinemax, coffee maker, microwave, fridge in a wetbar, iron/ironing board, ceiling fan, and a small sitting area with a work desk. Free WiFi included. Private bath with full tub and granite vanity.
+                        </p>
+
+                        <div class="room-actions">
+                            <a href="pages/NK1.html" class="room-btn btn-details">See Details</a>
+                            <a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank" class="room-btn btn-availability">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room 8: 2 Queen Beds, Upstairs, Non-Smoking -->
+                <div class="room-card" data-category="queen" id="room-queen-second-floor">
+                    <div class="room-image-container">
+                        <img src="Images/guestrooms/card7.avif" alt="2 Queen Beds Upstairs Non-Smoking Room" class="room-img">
+                        <span class="floor-badge">Upstairs</span>
+                        <span class="room-badge">Non-Smoking</span>
+                    </div>
+                    <div class="room-details">
+                        <h3 class="room-name">2 Queen Beds, Upstairs, Non-Smoking</h3>
+                        <div class="room-occupancy">
+                            <div class="occupancy-icon">
+                                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                <span>Up to 4 Adults</span>
+                            </div>
+                        </div>
+                        <p class="room-desc">
+                            Second floor air-conditioned room with two Queen beds that can easily accommodate up to four adults. Interior stairs only access. This spacious room offers HDTV w/HBO & Cinemax, coffee maker, microwave, fridge in a wetbar, iron/ironing board, ceiling fan, and a small sitting area with a work desk. Free WiFi included.
+                        </p>
+
+                        <div class="room-actions">
+                            <a href="pages/NQQ1.html" class="room-btn btn-details">See Details</a>
+                            <a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank" class="room-btn btn-availability">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="rooms-cta">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Book Your Stay?</h2>
+            <p class="cta-text">
+                All rooms include complimentary Grab & Go breakfast, WiFi, Local Calls, Parking, and access to our amenities. Book directly for the best rates and availability.
+            </p>
+            <a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank" class="cta-button">Reserve Your Room Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">DAYS INN & SUITES NASA</div>
+                <p class="footer-description">
+                    One of the area's best hotels in Webster, TX near Clear Lake and within the Houston metropolitan area. Offering location convenience, affordability, and comfort with true Southern Texas hospitality.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Hotel Features</h4>
+                <ul class="footer-links">
+                    <li><a href="#">63 Guest Rooms</a></li>
+                    <li><a href="gallery.html">Photo Gallery</a></li>
+                    <li><a href="amenities.html">Free Grab & Go Breakfast</a></li>
+                    <li><a href="amenities.html">Indoor Heated Pool</a></li>
+                    <li><a href="amenities.html">Business Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Nearby Attractions</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#location">NASA Johnson Space Center</a></li>
+                    <li><a href="index.html#location">Kemah Boardwalk</a></li>
+                    <li><a href="index.html#location">Schlitterbahn Galveston</a></li>
+                    <li><a href="index.html#location">Gulf Greyhound Park</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Guest Services</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#contact">24/7 Virtual Front Desk</a></li>
+                    <li><a href="amenities.html">Express Check-In/Out</a></li>
+                    <li><a href="amenities.html">Multilingual Staff</a></li>
+                    <li><a href="hotel-policies-page.html">Hotel Policies</a></li>
+                    <li><a href="https://www.wyndhamhotels.com/hotel/15443" target="_blank">Make a Reservation</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Days Inn & Suites NASA. 201 North Texas Ave, Webster, Texas 77598 | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+                
+                if (navLinks.classList.contains('active')) {
+                    setTimeout(() => navLinks.classList.add('visible'), 10);
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    navLinks.classList.remove('visible');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active', 'visible');
+                    menuToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // Room Filters
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const roomCards = document.querySelectorAll('.room-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.getAttribute('data-filter');
+                
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filter rooms
+                roomCards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeIn 0.5s ease';
+                    } else {
+                        const categories = card.getAttribute('data-category').split(' ');
+                        if (categories.includes(filter)) {
+                            card.style.display = 'block';
+                            card.style.animation = 'fadeIn 0.5s ease';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe room cards
+        document.querySelectorAll('.room-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
