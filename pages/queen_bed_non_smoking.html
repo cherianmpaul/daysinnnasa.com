@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1 King Bed, Accessible | Days Inn & Suites NASA Webster</title>
+    <title>1 Queen Bed, Second Floor, Non-Smoking | Days Inn & Suites NASA Webster</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@200;300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -37,8 +37,6 @@
             --mint-green: #d1fae5;
             --ocean-teal: #0891b2;
             --teal-light: #67e8f9;
-            --accessible-blue: #0066cc;
-            --accessible-light: #e6f2ff;
             
             /* Functional Colors */
             --glass: rgba(255, 255, 255, 0.08);
@@ -275,24 +273,24 @@
             z-index: 10;
         }
 
-        .accessible-icon {
+        .non-smoking-icon {
             width: 16px;
             height: 16px;
             fill: var(--brand-white);
         }
 
-        .ada-certified-badge {
+        .floor-indicator {
             position: absolute;
             bottom: 1.5rem;
             left: 1.5rem;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-            color: var(--accessible-blue);
+            color: var(--brand-blue-dark);
             padding: 0.8rem 1.8rem;
             font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 0.05em;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 102, 204, 0.3);
+            border: 1px solid rgba(0, 60, 113, 0.2);
             border-radius: 5px;
             display: flex;
             align-items: center;
@@ -435,10 +433,10 @@
             box-shadow: 0 5px 20px rgba(0, 36, 73, 0.3);
         }
 
-        /* Accessibility Notice */
-        .accessibility-notice {
-            background: linear-gradient(135deg, var(--accessible-light) 0%, rgba(74, 144, 226, 0.05) 100%);
-            border: 1px solid rgba(0, 102, 204, 0.3);
+        /* Non-Smoking Notice */
+        .non-smoking-notice {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(209, 250, 229, 0.3) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
             border-radius: 8px;
             padding: 1.5rem;
             margin-bottom: 2rem;
@@ -450,7 +448,7 @@
         .notice-icon {
             width: 24px;
             height: 24px;
-            fill: var(--accessible-blue);
+            fill: var(--fresh-green);
             flex-shrink: 0;
             margin-top: 2px;
         }
@@ -461,16 +459,24 @@
             line-height: 1.6;
         }
 
-        /* Room Features List */
-        .room-features-list {
-            list-style: disc;
-            padding-left: 2rem;
+        /* Stairs Only Notice */
+        .stairs-notice {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(103, 232, 249, 0.1) 100%);
+            border: 1px solid rgba(8, 145, 178, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
             margin-bottom: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
         }
 
-        .room-features-list li {
-            margin-bottom: 0.5rem;
-            color: var(--brand-blue-dark);
+        .stairs-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--ocean-teal);
+            flex-shrink: 0;
+            margin-top: 2px;
         }
 
         /* Amenities Section */
@@ -1006,7 +1012,7 @@
                 font-size: 0.75rem;
             }
 
-            .ada-certified-badge {
+            .floor-indicator {
                 bottom: 1rem;
                 left: 1rem;
                 padding: 0.6rem 1.2rem;
@@ -1089,54 +1095,61 @@
     <section class="room-hero">
         <div class="room-hero-container">
             <div class="room-image-showcase">
-                <img src="../Images/guestrooms/card8.jpg" alt="1 King Bed Accessible Room" class="room-main-image">
+                <img src="../Images/guestrooms/card3.avif" alt="1 Queen Bed Second Floor Non-Smoking Room" class="room-main-image">
                 <div class="image-badge">
-                    <svg class="accessible-icon" viewBox="0 0 24 24">
-                        <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
+                    <svg class="non-smoking-icon" viewBox="0 0 24 24">
+                        <path d="M2 5.27L3.28 4 20 20.72 18.73 22l-7-7H2v-3h7.73L2 4.27M20.5 13H22v3h-1.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5M18 13h1.5v3H18v-3m.85-8.12c.62-.61 1-1.45 1-2.38h-1.5c0 1.02-.83 1.85-1.85 1.85v1.5c2.24 0 4 1.83 4 4.07V12H22V9.76c0-2.22-1.28-4.14-3.15-5.03m-2.82 2.47H14.5c-1.02 0-1.85-.98-1.85-2s.83-1.75 1.85-1.75V2.1c-1.85 0-3.35 1.5-3.35 3.35s1.5 3.35 3.35 3.35h1.53c1.05 0 1.97.74 1.97 2.05V12H19.5v-1.64c0-1.81-1.6-3.16-3.47-3.16z"/>
                     </svg>
-                    ADA Accessible
+                    Non-Smoking
                 </div>
-                <div class="ada-certified-badge">
+                <div class="floor-indicator">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
                     </svg>
-                    ADA Compliant
+                    2nd Floor
                 </div>
             </div>
             <div class="room-info">
-                <div class="room-category-label">Accessible King Room</div>
-                <h1 class="room-title">1 King Bed, Accessible</h1>
+                <div class="room-category-label">Queen Room - Non-Smoking</div>
+                <h1 class="room-title">1 Queen Bed, Second Floor, Stairs Only</h1>
                 <div class="room-highlight">
-                    ✨ Thoughtfully designed for comfort and accessibility
+                    ✨ Upstairs Interior Corridor - Quieter setting
                 </div>
                 
-                <div class="accessibility-notice">
+                <div class="non-smoking-notice">
                     <svg class="notice-icon" viewBox="0 0 24 24">
-                        <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
                     <div class="notice-text">
-                        <strong>Accessibility First:</strong> NASA Days Inn & Suites cares about accessibility. This room has been specially designed with comprehensive ADA features to ensure comfort and independence for all guests. Our staff is available to assist with any specific needs.
+                        <strong>Non-Smoking Room:</strong> Enjoy a fresh, clean environment in our 100% smoke-free accommodation. Perfect for families and guests who prefer a pristine, odor-free atmosphere.
+                    </div>
+                </div>
+
+                <div class="stairs-notice">
+                    <svg class="stairs-icon" viewBox="0 0 24 24">
+                        <path d="M5 9l1.41 1.41L11 5.83V22h2V5.83l4.59 4.58L19 9l-7-7-7 7z"/>
+                    </svg>
+                    <div class="notice-text">
+                        <strong>Please Note:</strong> This second-floor room is accessible via stairs only; no elevator. Perfect for guests who prefer a quieter, more private setting away from ground-floor activity.
                     </div>
                 </div>
 
                 <p class="room-description">
-                    NASA Days Inn & Suites cares about accessibility and we have designed the 1 King Bed, Accessible guest room for guests with additional needs. This room features a large and comfortable King bed that can easily accommodate up to 2 adults making this a perfect room for couples. This spacious room offers a HDTV w/HBO & Cinemax, coffee maker, microwave,& mini-fridge in a wetbar, iron/ironing board, ceiling fan, and a small sitting area with a work desk. Free WiFi is included. The room includes a private bath with full tub and granite vanity with hairdryer and complimentary toiletries and plush towels. Feel free to contact our staff for more information about this accommodation.
+                    This air-conditioned non-smoking room with one queen bed can easily accommodate up to two adults. This spacious and comfortable room offers a HDTV w/HBO & Cinemax, coffee maker, microwave,& mini-fridge in a wetbar, iron/ironing board, ceiling fan, and a small sitting area with a work desk. Free WiFi is included. The room includes a private bath with full tub and granite vanity with hairdryer and complimentary toiletries and plush towels.
                 </p>
-
-
 
                 <div class="room-features">
                     <div class="feature-item">
                         <svg class="feature-icon" viewBox="0 0 24 24">
-                            <path d="M12 2l-1 1v8c0 .55-.45 1-1 1H8c-.55 0-1-.45-1-1V9.21c-1.91.49-3.33 2.03-3.52 3.9-.21 2.15 1.36 4.02 3.42 4.37 1.51.25 3.01-.43 3.86-1.74l.14-.24c.11-.2.32-.32.54-.32h3.18l.16-.29c.48-.88 1.55-1.39 2.52-1.09l.98-1.93c-1.68-.49-3.39.04-4.44 1.41h-1.9c-.52-1.27-1.62-2.26-2.97-2.66V3l-1-1h-2z"/>
+                            <path d="M5 9l1.41 1.41L11 5.83V22h2V5.83l4.59 4.58L19 9l-7-7-7 7z"/>
                         </svg>
-                        <span>Floor: 1st Floor (Easy Access)</span>
+                        <span>Floor: 2nd Floor (Stairs Only)</span>
                     </div>
                     <div class="feature-item">
                         <svg class="feature-icon" viewBox="0 0 24 24">
                             <path d="M2 21h19v-2H2v2zM20 8h-3V4h-2v4h-4V4H9v4H6V4H4v4c-1.11 0-2 .89-2 2v8h2v-4h4v4h2v-4h4v4h2v-4h4v4h2v-8c0-1.11-.89-2-2-2z"/>
                         </svg>
-                        <span>1 King Size Bed</span>
+                        <span>1 Queen Size Bed</span>
                     </div>
                     <div class="feature-item">
                         <svg class="feature-icon" viewBox="0 0 24 24">
@@ -1149,12 +1162,6 @@
                             <path d="M2 5.27L3.28 4 20 20.72 18.73 22l-7-7H2v-3h7.73L2 4.27M20.5 13H22v3h-1.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5M18 13h1.5v3H18v-3m.85-8.12c.62-.61 1-1.45 1-2.38h-1.5c0 1.02-.83 1.85-1.85 1.85v1.5c2.24 0 4 1.83 4 4.07V12H22V9.76c0-2.22-1.28-4.14-3.15-5.03m-2.82 2.47H14.5c-1.02 0-1.85-.98-1.85-2s.83-1.75 1.85-1.75V2.1c-1.85 0-3.35 1.5-3.35 3.35s1.5 3.35 3.35 3.35h1.53c1.05 0 1.97.74 1.97 2.05V12H19.5v-1.64c0-1.81-1.6-3.16-3.47-3.16z"/>
                         </svg>
                         <span>100% Non-Smoking</span>
-                    </div>
-                    <div class="feature-item">
-                        <svg class="feature-icon" viewBox="0 0 24 24">
-                            <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
-                        </svg>
-                        <span>ADA Accessible Guest Room</span>
                     </div>
                 </div>
                 
@@ -1360,7 +1367,7 @@
                         <div class="other-room-info">
                             <h3 class="other-room-name">1 King Bed, Non-Smoking</h3>
                             <p class="other-room-type">Ground Floor</p>
-                            <a href="NK2.html" class="other-room-link">View Room →</a>
+                            <a href="king_bed_ground_floor_non_smoking.html" class="other-room-link">View Room →</a>
                         </div>
                     </div>
                     <!-- Room 2 -->
@@ -1371,7 +1378,7 @@
                         <div class="other-room-info">
                             <h3 class="other-room-name">1 King Bed, Smoking</h3>
                             <p class="other-room-type">Ground Floor</p>
-                            <a href="K12.html" class="other-room-link">View Room →</a>
+                            <a href="king_bed_1st_floor_smoking_room.html" class="other-room-link">View Room →</a>
                         </div>
                     </div>
                     <!-- Room 3 -->
@@ -1382,7 +1389,7 @@
                         <div class="other-room-info">
                             <h3 class="other-room-name">1 King Bed, Second Floor</h3>
                             <p class="other-room-type">Interior Stairs Only</p>
-                            <a href="NK1.html" class="other-room-link">View Room →</a>
+                            <a href="king_bed_non_smoking.html" class="other-room-link">View Room →</a>
                         </div>
                     </div>
                     <!-- Room 4 -->
@@ -1393,18 +1400,18 @@
                         <div class="other-room-info">
                             <h3 class="other-room-name">2 Queen Beds, Second Floor</h3>
                             <p class="other-room-type">Family Room</p>
-                            <a href="NQQ1.html" class="other-room-link">View Room →</a>
+                            <a href="two_queen_beds_non_smoking.html" class="other-room-link">View Room →</a>
                         </div>
                     </div>
                     <!-- Room 5 -->
                     <div class="other-room-card">
                         <div class="other-room-image">
-                            <img src="../Images/guestrooms/card3.avif" alt="1 Queen Bed Second Floor">
+                            <img src="../Images/guestrooms/card2.avif" alt="1 King Bed Accessible">
                         </div>
                         <div class="other-room-info">
-                            <h3 class="other-room-name">1 Queen Bed, Second Floor</h3>
-                            <p class="other-room-type">Non-Smoking</p>
-                            <a href="NQ1.html" class="other-room-link">View Room →</a>
+                            <h3 class="other-room-name">1 King Bed, Accessible</h3>
+                            <p class="other-room-type">Wheelchair Accessible</p>
+                            <a href="king_bed_accessible_non_smoking.html" class="other-room-link">View Room →</a>
                         </div>
                     </div>
                 </div>
